@@ -1,0 +1,94 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet id="12" author="sa">
+        <insert tableName="app_user">
+            <column name="user_name" value="andrew"/>
+            <column name="email" value="and@sdv.com"/>
+            <column name="password" value="$2a$12$9hjGE.GabdAAXV0tRpOgG.BjzzfkYrXkmd.fl.S7RSOJIQwIsEYea"/>
+            <column name="is_enable" value="1"/>
+            <column name="is_active" value="1"/>
+            <column name="is_expired" value="0"/>
+            <column name="is_credentials_expired" value="0"/>
+            <column name="is_email_verified" value="1"/>
+            <column name="role" value="ADMIN"/>
+            <column name="created_date" value="2008-11-11"/>
+        </insert>
+
+        <insert tableName="app_user">
+            <column name="user_name" value="anton"/>
+            <column name="email" value="anton@sdv.com"/>
+            <column name="password" value="$2a$12$9hjGE.GabdAAXV0tRpOgG.BjzzfkYrXkmd.fl.S7RSOJIQwIsEYea"/>
+            <column name="is_enable" value="1"/>
+            <column name="is_active" value="1"/>
+            <column name="is_expired" value="0"/>
+            <column name="is_credentials_expired" value="0"/>
+            <column name="is_email_verified" value="1"/>
+            <column name="role" value="ADMIN"/>
+            <column name="created_date" value="2019-02-03"/>
+        </insert>
+        <insert tableName="app_user">
+            <column name="user_name" value="gerry"/>
+            <column name="email" value="gerry@sdv.com"/>
+            <column name="password" value="$2a$12$9hjGE.GabdAAXV0tRpOgG.BjzzfkYrXkmd.fl.S7RSOJIQwIsEYea"/>
+            <column name="is_enable" value="1"/>
+            <column name="is_active" value="1"/>
+            <column name="is_expired" value="0"/>
+            <column name="is_credentials_expired" value="0"/>
+            <column name="is_email_verified" value="1"/>
+            <column name="role" value="USER"/>
+            <column name="created_date" value="2019-02-03"/>
+        </insert>
+        <insert tableName="app_user">
+            <column name="user_name" value="vita"/>
+            <column name="email" value="vita@sdv.com"/>
+            <column name="password" value="$2a$12$9hjGE.GabdAAXV0tRpOgG.BjzzfkYrXkmd.fl.S7RSOJIQwIsEYea"/>
+            <column name="is_enable" value="1"/>
+            <column name="is_active" value="1"/>
+            <column name="is_expired" value="0"/>
+            <column name="is_credentials_expired" value="0"/>
+            <column name="is_email_verified" value="1"/>
+            <column name="role" value="USER"/>
+            <column name="created_date" value="2019-02-03"/>
+        </insert>
+        <insert tableName="app_user">
+            <column name="user_name" value="petro"/>
+            <column name="email" value="petro@sdv.com"/>
+            <column name="password" value="$2a$12$9hjGE.GabdAAXV0tRpOgG.BjzzfkYrXkmd.fl.S7RSOJIQwIsEYea"/>
+            <column name="is_enable" value="1"/>
+            <column name="is_active" value="1"/>
+            <column name="is_expired" value="0"/>
+            <column name="is_credentials_expired" value="0"/>
+            <column name="is_email_verified" value="1"/>
+            <column name="role" value="USER"/>
+            <column name="created_date" value="2019-02-03"/>
+        </insert>
+        <insert tableName="app_user">
+            <column name="user_name" value="taras"/>
+            <column name="email" value="taras@sdv.com"/>
+            <column name="password" value="$2a$12$9hjGE.GabdAAXV0tRpOgG.BjzzfkYrXkmd.fl.S7RSOJIQwIsEYea"/>
+            <column name="is_enable" value="1"/>
+            <column name="is_active" value="1"/>
+            <column name="is_expired" value="0"/>
+            <column name="is_credentials_expired" value="0"/>
+            <column name="is_email_verified" value="1"/>
+            <column name="role" value="USER"/>
+            <column name="created_date" value="2019-02-03"/>
+        </insert>
+        <insert tableName="app_user">
+            <column name="user_name" value="vasyl"/>
+            <column name="email" value="vasyl@sdv.com"/>
+            <column name="password" value="$2a$12$9hjGE.GabdAAXV0tRpOgG.BjzzfkYrXkmd.fl.S7RSOJIQwIsEYea"/>
+            <column name="is_enable" value="1"/>
+            <column name="is_active" value="1"/>
+            <column name="is_expired" value="0"/>
+            <column name="is_credentials_expired" value="0"/>
+            <column name="is_email_verified" value="1"/>
+            <column name="role" value="ADMIN"/>
+            <column name="created_date" value="2019-02-03"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

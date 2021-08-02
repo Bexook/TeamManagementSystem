@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:petProjectDBTest/?username=sa&password=sa
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      settings:
+       web-admin-password: sa
+       web-allow-others: true
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master-test.xml
+  thymeleaf:
+      mode: html
+
+logging:
+  level:
+    liquibase: INFO

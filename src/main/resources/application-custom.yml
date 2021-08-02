@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:petProjectDB/?username=sa&password=sa
+    driverClassName: org.h2.Driver
+
+    sql-script-encoding: UTF-8
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-admin-password: sa
+        web-allow-others: true
+
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml

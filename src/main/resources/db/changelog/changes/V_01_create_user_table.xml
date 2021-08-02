@@ -1,0 +1,42 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet id="01" author="sa">
+        <createTable tableName="app_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_enable" type="bit(1)" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_active" type="bit(1)" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_expired" type="bit(1)" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_credentials_expired" type="bit(1)" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_email_verified" type="bit(1)" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>
