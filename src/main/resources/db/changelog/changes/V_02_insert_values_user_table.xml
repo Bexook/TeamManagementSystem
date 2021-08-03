@@ -13,7 +13,7 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             <column name="is_expired" value="0"/>
             <column name="is_credentials_expired" value="0"/>
             <column name="is_email_verified" value="1"/>
-            <column name="role" value="ADMIN"/>
+            <column name="role" value="USER"/>
             <column name="created_date" value="2008-11-11"/>
         </insert>
 

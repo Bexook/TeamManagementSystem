@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="account-overview">
+    <div id="main-data">
+        <label>
+            Username <p th:text="${authenticatedUser.getUsername()}"></p>
+        </label>
+        <label>
+            Role <p th:text="${authenticatedUser.getTeamMemberRole()}"></p>
+        </label>
+        <div id="admin-container">
+            <label>
+                TeamMemberId -> <p th:text="${authenticatedUser.getId()}"></p>
+            </label>
+            <label>
+                UserId -> <p th:text="${authenticatedUser.getUserId()}"></p>
+            </label>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

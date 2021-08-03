@@ -1,7 +1,6 @@
 package com.example.petProject.model.dto;
 
 import com.example.petProject.model.enumTypes.TeamMemberRole;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

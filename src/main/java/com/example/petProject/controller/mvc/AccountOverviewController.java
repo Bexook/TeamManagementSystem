@@ -1,29 +1,27 @@
 package com.example.petProject.controller.mvc;
 
-import com.example.petProject.model.AccountDetails;
-import com.example.petProject.model.entity.TeamMemberEntity;
+import com.example.petProject.configuration.security.userAuthDataConfiguration.AppUserDetails;
+import com.example.petProject.model.dto.TeamMemberDTO;
 import com.example.petProject.service.model.AccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/account")
 public class AccountOverviewController {
-
 
     @Autowired
     private AccountDetailsService accountDetailsService;
 
-    @ResponseBody
-    @GetMapping("/{id}")
-    public String getAccountDetails(@PathVariable("id") Long id) {
-        return accountDetailsService.getAccountDetailsForSpecificAcc(id);
+    @GetMapping("/")
+    @PreAuthorize("@userAccessValidation.hasRole('USER','ADMIN')")
+    public String getAccountDetails(Model model) {
+        AppUserDetails appUserDetails = (AppUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TeamMemberDTO teamMemberDTO = accountDetailsService.getAccountDetailsForSpecificAcc(appUserDetails.getUsername());
+        model.addAttribute("authenticatedUser", teamMemberDTO);
+        return "account-overview";
     }
-
-
 }

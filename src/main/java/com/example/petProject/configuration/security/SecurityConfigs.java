@@ -44,9 +44,7 @@ public class SecurityConfigs extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .failureHandler(authenticationFailureHandler)
-                .defaultSuccessUrl("/", true)
-                .and()
-                .rememberMe().key("someUserWhoDoNotWantToLoginEveryTime").tokenValiditySeconds(3600);
+                .defaultSuccessUrl("/", true);
     }
 
 

@@ -1,8 +1,7 @@
 package com.example.petProject.configuration.security.userAuthDataConfiguration;
 
-import com.example.petProject.model.enumTypes.auth.UserRole;
 import com.example.petProject.model.entity.UserEntity;
-import lombok.NonNull;
+import com.example.petProject.model.enumTypes.auth.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
