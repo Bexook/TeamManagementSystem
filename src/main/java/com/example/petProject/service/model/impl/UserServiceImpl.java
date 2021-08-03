@@ -1,5 +1,6 @@
 package com.example.petProject.service.model.impl;
 
+import com.example.petProject.annotation.ChangeRequest;
 import com.example.petProject.model.entity.UserEntity;
 import com.example.petProject.repository.UserRepository;
 import com.example.petProject.service.model.UserService;
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @ChangeRequest
     public boolean deleteUser(UserEntity userEntity) {
         userRepository.delete(userEntity);
         return userRepository.getById(userEntity.getId()).isActive();

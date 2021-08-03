@@ -1,5 +1,6 @@
 package com.example.petProject.model.entity;
 
+import com.example.petProject.annotation.ChangeRequest;
 import com.example.petProject.model.dto.TeamMemberDTO;
 import com.example.petProject.model.enumTypes.TeamMemberRole;
 import lombok.Data;
