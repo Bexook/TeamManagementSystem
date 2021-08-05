@@ -16,11 +16,9 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Date;
@@ -30,8 +28,6 @@ import java.util.Objects;
 @Service
 public class TeamMemberServiceImpl implements TeamMemberService {
 
-    @Autowired
-    private DispatcherServlet dispatcherServlet;
     @Autowired
     private TeamMemberRepository teamMemberRepository;
     @Autowired
@@ -87,7 +83,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     @Override
     public void registerTeamMember(final UserRegisterDTO userRegisterDTO) throws IOException, BadHttpRequest {
         if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getRepeatPassword())) {
-           throw new BadHttpRequest();
+            throw new BadHttpRequest();
         }
 
         if (Strings.isBlank(userRegisterDTO.getEmail())) {
@@ -103,8 +99,8 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         teamMemberEntity.setUserEntity(userEntity);
         teamMemberEntity.setName(userRegisterDTO.getUsername());
         teamMemberEntity.setMemberRole(userRegisterDTO.getTeamMemberRole());
-        if(!this.addNew(teamMemberEntity)) {
-           throw new BadHttpRequest();
+        if (!this.addNew(teamMemberEntity)) {
+            throw new BadHttpRequest();
         }
     }
 

@@ -1,18 +1,17 @@
 package com.example.petProject.model.entity;
 
-import com.example.petProject.annotation.ChangeRequest;
 import com.example.petProject.model.dto.TeamMemberDTO;
 import com.example.petProject.model.enumTypes.TeamMemberRole;
 import lombok.Data;
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 @SqlResultSetMappings(value = {
         @SqlResultSetMapping(name = "toTeamMemberDTO",

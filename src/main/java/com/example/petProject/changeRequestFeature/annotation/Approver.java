@@ -1,4 +1,4 @@
-package com.example.petProject.annotation;
+package com.example.petProject.changeRequestFeature.annotation;
 
 import com.example.petProject.model.enumTypes.auth.UserRole;
 
@@ -7,11 +7,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.TYPE,ElementType.METHOD})
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ChangeRequest {
+public @interface Approver {
+    long id() default 1L;
 
-    UserRole[] userRole() default UserRole.ADMIN;
+    UserRole userRole() default UserRole.ADMIN;
 
-
+    Class<?> repository();
 }

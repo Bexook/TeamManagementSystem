@@ -1,20 +1,24 @@
 package com.example.petProject.service.model.impl;
 
-import com.example.petProject.annotation.ChangeRequest;
+import com.example.petProject.changeRequestFeature.annotation.Approver;
+import com.example.petProject.changeRequestFeature.annotation.ChangeRequest;
 import com.example.petProject.model.entity.UserEntity;
+import com.example.petProject.model.enumTypes.auth.UserRole;
+import com.example.petProject.repository.TeamMemberRepository;
 import com.example.petProject.repository.UserRepository;
 import com.example.petProject.service.model.UserService;
 import lombok.NonNull;
-import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@Approver(id = 1, userRole = UserRole.ADMIN, repository = TeamMemberRepository.class)
 public class UserServiceImpl implements UserService {
 
 
@@ -30,6 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean registerUser(@NonNull UserEntity userEntity) {
         userRepository.save(userEntity);
         return Objects.nonNull(userRepository.findByEmail(userEntity.getEmail()));
@@ -37,9 +42,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @ChangeRequest
-    public boolean deleteUser(UserEntity userEntity) {
+    @Transactional
+    public void deleteById(Long id) {
+        UserEntity userEntity = userRepository.getById(id);
         userRepository.delete(userEntity);
-        return userRepository.getById(userEntity.getId()).isActive();
+        userRepository.getById(userEntity.getId());
     }
 
     @Override

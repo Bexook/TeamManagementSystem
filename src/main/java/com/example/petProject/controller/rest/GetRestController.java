@@ -41,7 +41,7 @@ public class GetRestController {
     @PreAuthorize("@userAccessValidation.hasAuthority('DELETE')")
     @DeleteMapping("/delete/{userId}")
     public void deleteSpecific(@PathVariable Long userId) {
-        userService.deleteUser(userService.getUserById(userId));
+        userService.deleteById(userService.getUserById(userId).getId());
     }
 
 
