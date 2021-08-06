@@ -21,9 +21,6 @@ public enum TeamMemberRole {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public static TeamMemberRole getByCode(int code){
         return Arrays.stream(values()).filter(element->element.getCode() == code).findFirst().orElseThrow();

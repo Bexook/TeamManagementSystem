@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Approver {
-    long id() default 1L;
 
     UserRole userRole() default UserRole.ADMIN;
 

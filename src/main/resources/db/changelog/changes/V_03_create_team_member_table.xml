@@ -15,7 +15,7 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
                 <constraints nullable="false"/>
             </column>
             <column name="user_id" type="BIGINT" defaultValue="false">
-                <constraints foreignKeyName="user_id_constraint"
+                <constraints foreignKeyName="user_id_fk"
                              referencedTableName="app_user"
                              nullable="false"
                              unique="true"/>

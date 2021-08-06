@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     void deleteById(@NonNull Long id);
 
+    @Override
+    @NonNull
+    UserEntity getById(@NonNull Long id);
 }

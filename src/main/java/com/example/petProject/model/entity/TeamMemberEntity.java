@@ -1,5 +1,6 @@
 package com.example.petProject.model.entity;
 
+import com.example.petProject.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.petProject.model.dto.TeamMemberDTO;
 import com.example.petProject.model.enumTypes.TeamMemberRole;
 import lombok.Data;
@@ -43,7 +44,7 @@ import javax.persistence.*;
 @Filter(name = "filterByRole", condition = "team_member_role = :role")
 @FilterDef(name = "filterByRoleDef", parameters = @ParamDef(name = "role", type = "String"))
 @SQLDelete(sql = "UPDATE app_user SET is_active = 0 WHERE public.app_user.id= ? ", check = ResultCheckStyle.COUNT)
-public class TeamMemberEntity {
+public class TeamMemberEntity implements ChangeRequestEntityMarker<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,26 +9,54 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="username" type="varchar(100)">
+            <column name="created_by" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="approver" type="varchar(300)">
+            <column name="approver_role" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="state" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="current_object_state" type="VARCHAR(1500)">
-            </column>
-            <column name="new_object_state" type="VARCHAR(1500)">
+            <column name="operation_type" type="BIGINT">
                 <constraints nullable="false"/>
+            </column>
+            <column name="current_object_state" type="VARCHAR(5000)">
+            </column>
+            <column name="new_object_state" type="VARCHAR(5000)">
             </column>
             <column name="created_date" type="date">
                 <constraints nullable="false"/>
             </column>
-            <column name="parent_id" type="BIGINT">
+        </createTable>
+
+
+        <createTable tableName="change_request_comment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="comment" type="varchar(5000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment_by" type="VARCHAR(150)">
+                <constraints nullable="false"/>
             </column>
         </createTable>
 
+
+        <createTable tableName="change_request_comments_ref">
+            <column name="comment_id" type="BIGINT">
+                <constraints
+                        foreignKeyName="comment_id_fk"
+                        referencedTableName="change_request_comment"
+                />
+            </column>
+            <column name="change_request_id" type="BIGINT">
+                <constraints
+                        foreignKeyName="change_request_id_fk"
+                        referencedTableName="change_request"
+                />
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>

@@ -2,6 +2,7 @@ package com.example.petProject.service.model.impl;
 
 import com.example.petProject.changeRequestFeature.annotation.Approver;
 import com.example.petProject.changeRequestFeature.annotation.ChangeRequest;
+import com.example.petProject.changeRequestFeature.model.enumTypes.OperationType;
 import com.example.petProject.model.entity.UserEntity;
 import com.example.petProject.model.enumTypes.auth.UserRole;
 import com.example.petProject.repository.TeamMemberRepository;
@@ -18,9 +19,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@Approver(id = 1, userRole = UserRole.ADMIN, repository = TeamMemberRepository.class)
+@Approver(userRole = UserRole.ADMIN, repository = UserRepository.class)
 public class UserServiceImpl implements UserService {
-
 
     @Autowired
     private UserRepository userRepository;
@@ -34,15 +34,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(Transactional.TxType.MANDATORY)
     public boolean registerUser(@NonNull UserEntity userEntity) {
         userRepository.save(userEntity);
         return Objects.nonNull(userRepository.findByEmail(userEntity.getEmail()));
     }
 
     @Override
-    @ChangeRequest
-    @Transactional
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
+    @ChangeRequest(operationType = OperationType.DELETE)
     public void deleteById(Long id) {
         UserEntity userEntity = userRepository.getById(id);
         userRepository.delete(userEntity);

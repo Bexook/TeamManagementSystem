@@ -30,7 +30,7 @@ public class GetRestController {
         return "HELLO";
     }
 
-    @PreAuthorize("@userAccessValidation.hasRole('ADMIN')")
+//    @PreAuthorize("@userAccessValidation.hasRole('ADMIN')")
     @GetMapping("/getAll")
     public ResponseEntity<List<UserEntity>> getAll() {
         System.out.println(userService.findAll(true));
