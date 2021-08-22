@@ -13,4 +13,5 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 )
 @Profile("jwt-security")
 public class JWTSecurityConfigs extends WebSecurityConfigurerAdapter {
+
 }
