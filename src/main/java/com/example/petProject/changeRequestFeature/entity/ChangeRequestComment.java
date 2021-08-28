@@ -1,10 +1,12 @@
 package com.example.petProject.changeRequestFeature.entity;
 
+import com.example.petProject.model.entity.BaseEntity;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "change_request_comment")
-public class ChangeRequestComment {
+public class ChangeRequestComment extends BaseEntity {
 
     @Id
     @Column(name = "id")

@@ -1,5 +1,6 @@
 package com.example.petProject.changeRequestFeature.aspect;
 
+import com.example.petProject.changeRequestFeature.annotation.Approver;
 import com.example.petProject.changeRequestFeature.annotation.ChangeRequest;
 import com.example.petProject.changeRequestFeature.entity.ChangeRequestEntity;
 import com.example.petProject.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
@@ -8,18 +9,18 @@ import com.example.petProject.changeRequestFeature.repository.ChangeRequestRepos
 import com.example.petProject.configuration.security.userAuthDataConfiguration.AppUserDetails;
 import com.example.petProject.exception.RequestApproval;
 import com.example.petProject.model.enumTypes.auth.UserRole;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 
@@ -48,7 +49,7 @@ public class ChangeRequestAnnotation {
 
         ChangeRequest changeRequest = clazz.getMethod(joinPoint.getSignature().getName(), Long.class).getAnnotation(ChangeRequest.class);
 
-        com.example.petProject.changeRequestFeature.annotation.Approver annotation = clazz.getAnnotation(com.example.petProject.changeRequestFeature.annotation.Approver.class);
+        Approver annotation = clazz.getAnnotation(Approver.class);
 
         Method method = annotation.repository().getMethod("getById", Long.class);
 
@@ -56,9 +57,21 @@ public class ChangeRequestAnnotation {
         ChangeRequestEntity changeRequestEntity = new ChangeRequestEntity();
         changeRequestEntity.setChangeRequestState(ChangeRequestState.PENDING);
         changeRequestEntity.setCreatedBy(userDetails.getUsername());
-        changeRequestEntity.setLocalDate(new Date());
+        changeRequestEntity.setCreatedAt(new Date());
         changeRequestEntity.setUserRole(annotation.userRole());
         changeRequestEntity.setOperationType(changeRequest.operationType());
+        changeRequestOperation(joinPoint, changeRequest, annotation, method, changeRequestEntity);
+        changeRequestRepository.save(changeRequestEntity);
+
+        throw new RequestApproval("You do not have permission to change objects here, changes approval are requested");
+
+    }
+
+    private void changeRequestOperation(JoinPoint joinPoint,
+                                        ChangeRequest changeRequest,
+                                        Approver annotation,
+                                        Method method,
+                                        ChangeRequestEntity changeRequestEntity) throws JsonProcessingException, IllegalAccessException, InvocationTargetException {
         switch (changeRequest.operationType()) {
             case CREATE: {
                 ChangeRequestEntityMarker changeableObject = (ChangeRequestEntityMarker) joinPoint.getArgs()[0];
@@ -79,9 +92,5 @@ public class ChangeRequestAnnotation {
                 break;
             }
         }
-        changeRequestRepository.save(changeRequestEntity);
-
-        throw new RequestApproval("You do not have permission to change objects here, changes approval are requested");
-
     }
 }

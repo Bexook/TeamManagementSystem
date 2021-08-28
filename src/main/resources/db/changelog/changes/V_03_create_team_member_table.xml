@@ -20,6 +20,12 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
                              nullable="false"
                              unique="true"/>
             </column>
+            <column name="created_at" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="date">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
 

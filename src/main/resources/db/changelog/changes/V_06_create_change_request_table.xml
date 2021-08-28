@@ -25,8 +25,11 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             </column>
             <column name="new_object_state" type="VARCHAR(5000)">
             </column>
-            <column name="created_date" type="date">
+            <column name="created_at" type="date">
                 <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="date">
+                <constraints nullable="true"/>
             </column>
         </createTable>
 
@@ -40,6 +43,12 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             </column>
             <column name="comment_by" type="VARCHAR(150)">
                 <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="date">
+                <constraints nullable="true"/>
             </column>
         </createTable>
 

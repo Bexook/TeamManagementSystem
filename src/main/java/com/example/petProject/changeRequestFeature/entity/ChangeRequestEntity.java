@@ -3,6 +3,7 @@ package com.example.petProject.changeRequestFeature.entity;
 import com.example.petProject.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.petProject.changeRequestFeature.model.enumTypes.ChangeRequestState;
 import com.example.petProject.changeRequestFeature.model.enumTypes.OperationType;
+import com.example.petProject.model.entity.BaseEntity;
 import com.example.petProject.model.enumTypes.auth.UserRole;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializable;
@@ -23,7 +24,7 @@ import java.util.Set;
 @Entity
 @ToString
 @Table(name = "change_request")
-public class ChangeRequestEntity {
+public class ChangeRequestEntity extends BaseEntity {
 
     @Id
     @Column(name = "id")
@@ -49,10 +50,6 @@ public class ChangeRequestEntity {
 
     @Column(name = "new_object_state")
     private String newObjectState;
-
-    @Temporal(value = TemporalType.DATE)
-    @Column(name = "created_date")
-    private Date localDate;
 
 
     @OneToMany(
