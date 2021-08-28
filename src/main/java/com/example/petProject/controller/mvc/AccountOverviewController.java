@@ -4,13 +4,13 @@ import com.example.petProject.configuration.security.userAuthDataConfiguration.A
 import com.example.petProject.model.dto.TeamMemberDTO;
 import com.example.petProject.service.model.AccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class AccountOverviewController {
 
     @Autowired
@@ -18,10 +18,9 @@ public class AccountOverviewController {
 
     @GetMapping("/")
     @PreAuthorize("@userAccessValidation.hasRole('USER','ADMIN')")
-    public String getAccountDetails(Model model) {
+    public ResponseEntity<TeamMemberDTO> getAccountDetails() {
         AppUserDetails appUserDetails = (AppUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TeamMemberDTO teamMemberDTO = accountDetailsService.getAccountDetailsForSpecificAcc(appUserDetails.getUsername());
-        model.addAttribute("authenticatedUser", teamMemberDTO);
-        return "account-overview";
+        return ResponseEntity.ok().body(teamMemberDTO);
     }
 }

@@ -7,4 +7,5 @@
     <include file="/db/changelog/changes/V_02_insert_values_user_table.xml"/>
     <include file="/db/changelog/changes/V_03_create_team_member_table.xml"/>
     <include file="/db/changelog/changes/V_04_insert_values_team_member_table.xml"/>
+    <include file="/db/changelog/changes/V_05_create_jwt_token_table.xml"/>
 </databaseChangeLog>
