@@ -13,6 +13,9 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
   liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master-test.xml
+    change-log: classpath:/db/changelog/db.changelog-master.xml
 
 
+jwt:
+  secret: jWtSecreTk_e_y
+  expiration: 30
