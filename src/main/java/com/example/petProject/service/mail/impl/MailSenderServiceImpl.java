@@ -40,12 +40,12 @@ public class MailSenderServiceImpl implements MailSenderService {
         message.setSentDate(new Date());
 
 
-        Transport.send(message);
-
-//        MimeBodyPart messageBodyPart = new MimeBodyPart();
-//        messageBodyPart.setContent("Tutorials point email", "text/html");
+//        Transport.send(message);
 //
-//        message.setContent(messageBodyPart);
+////        MimeBodyPart messageBodyPart = new MimeBodyPart();
+////        messageBodyPart.setContent("Tutorials point email", "text/html");
+////
+////        message.setContent(messageBodyPart);
     }
 
 
