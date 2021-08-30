@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+@Profile({"dev","custom"})
 @EnableWebMvc
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -46,7 +47,6 @@ public class SecurityConfigs extends WebSecurityConfigurerAdapter {
                 .failureHandler(authenticationFailureHandler)
                 .defaultSuccessUrl("/", true);
     }
-
 
     @Bean
     @Profile("dev")
