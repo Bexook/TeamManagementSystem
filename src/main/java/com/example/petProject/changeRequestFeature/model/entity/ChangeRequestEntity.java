@@ -1,4 +1,4 @@
-package com.example.petProject.changeRequestFeature.entity;
+package com.example.petProject.changeRequestFeature.model.entity;
 
 import com.example.petProject.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.petProject.changeRequestFeature.model.enumTypes.ChangeRequestState;
@@ -6,24 +6,25 @@ import com.example.petProject.changeRequestFeature.model.enumTypes.OperationType
 import com.example.petProject.model.entity.BaseEntity;
 import com.example.petProject.model.enumTypes.auth.UserRole;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializable;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.jsoniter.output.JsonStream;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import netscape.javascript.JSObject;
-import org.apache.tomcat.util.json.JSONParser;
-import org.joda.time.LocalDate;
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Data
 @Entity
 @ToString
 @Table(name = "change_request")
+@EqualsAndHashCode(callSuper = true)
+@Where(clause = " is_relevant = true ")
+@SQLDelete(sql = "UPDATE change_request SET is_relevant = 0 WHERE public.change_request.id= ? ", check = ResultCheckStyle.COUNT)
 public class ChangeRequestEntity extends BaseEntity {
 
     @Id
@@ -53,7 +54,7 @@ public class ChangeRequestEntity extends BaseEntity {
 
 
     @OneToMany(
-            targetEntity = ChangeRequestComment.class,
+            targetEntity = ChangeRequestCommentEntity.class,
             cascade = CascadeType.PERSIST,
             orphanRemoval = true
     )
@@ -73,8 +74,10 @@ public class ChangeRequestEntity extends BaseEntity {
                             foreignKey = @ForeignKey(name = "comment_id_fk")
                     )}
     )
-    private Set<ChangeRequestComment> changeRequestComments;
+    private Set<ChangeRequestCommentEntity> changeRequestCommentEntities;
 
+    @Column(name = "is_relevent")
+    private boolean isRelevant = true;
 
     public void setCurrentObjectState(ChangeRequestEntityMarker currentObjectState) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

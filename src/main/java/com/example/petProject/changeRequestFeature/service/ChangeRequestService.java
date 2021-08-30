@@ -1,6 +1,6 @@
 package com.example.petProject.changeRequestFeature.service;
 
-import com.example.petProject.changeRequestFeature.entity.ChangeRequestEntity;
+import com.example.petProject.changeRequestFeature.model.entity.ChangeRequestEntity;
 
 import java.util.List;
 

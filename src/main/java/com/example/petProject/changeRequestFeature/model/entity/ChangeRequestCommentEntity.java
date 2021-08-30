@@ -1,12 +1,17 @@
-package com.example.petProject.changeRequestFeature.entity;
+package com.example.petProject.changeRequestFeature.model.entity;
 
 import com.example.petProject.model.entity.BaseEntity;
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "change_request_comment")
-public class ChangeRequestComment extends BaseEntity {
+@Where(clause = " is_relevant = true ")
+@SQLDelete(sql = "UPDATE change_request SET is_relevant = 0 WHERE public.change_request_comment.id= ? ", check = ResultCheckStyle.COUNT)
+public class ChangeRequestCommentEntity extends BaseEntity {
 
     @Id
     @Column(name = "id")
@@ -37,5 +42,8 @@ public class ChangeRequestComment extends BaseEntity {
                     )}
     )
     private ChangeRequestEntity changeRequestEntity;
+
+    @Column(name = "is_relevant")
+    private boolean is_relevant = true;
 
 }

@@ -2,7 +2,7 @@ package com.example.petProject.changeRequestFeature.aspect;
 
 import com.example.petProject.changeRequestFeature.annotation.Approver;
 import com.example.petProject.changeRequestFeature.annotation.ChangeRequest;
-import com.example.petProject.changeRequestFeature.entity.ChangeRequestEntity;
+import com.example.petProject.changeRequestFeature.model.entity.ChangeRequestEntity;
 import com.example.petProject.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.petProject.changeRequestFeature.model.enumTypes.ChangeRequestState;
 import com.example.petProject.changeRequestFeature.repository.ChangeRequestRepository;
@@ -38,6 +38,8 @@ public class ChangeRequestAnnotation {
     }
 
 
+    //TODO create approving of change request, updating and writing comments to one
+
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     @Before(value = "annotationPointCut()", argNames = "joinPoint")
     public Object executeAnnotation(JoinPoint joinPoint) throws Throwable {
@@ -64,7 +66,6 @@ public class ChangeRequestAnnotation {
         changeRequestRepository.save(changeRequestEntity);
 
         throw new RequestApproval("You do not have permission to change objects here, changes approval are requested");
-
     }
 
     private void changeRequestOperation(JoinPoint joinPoint,
