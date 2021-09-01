@@ -5,6 +5,7 @@ import com.example.petProject.changeRequestFeature.service.ChangeRequestCommentS
 import com.example.petProject.changeRequestFeature.service.ChangeRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,10 +18,11 @@ public class ChangeRequestAdminOperation {
     @Autowired
     private ChangeRequestCommentService changeRequestCommentService;
 
-//
-//    @PostMapping("/update-state/{change-request-id}")
-//    public ResponseEntity<ChangeRequestReviewDTO> review(@RequestBody ChangeRequestReviewDTO changeRequestReviewDTO,
-//                                                         @PathVariable("change-request-id") Long id) {
+
+    @PreAuthorize("@userAccessValidation.hasAuthority('APPROVE')")
+    @PostMapping("/update-state/{change-request-id}")
+    public ResponseEntity<ChangeRequestReviewDTO> review(@RequestBody ChangeRequestReviewDTO changeRequestReviewDTO,
+                                                         @PathVariable("change-request-id") Long id) {
 //        return ResponseEntity <>
-//    }
+    }
 }

@@ -35,6 +35,9 @@ public class ChangeRequestEntity extends BaseEntity {
     @Column(name = "created_by")
     private String createdBy;
 
+    @Column(name = "modified_by")
+    private String modifiedBy;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "approver_role")
     private UserRole userRole;
