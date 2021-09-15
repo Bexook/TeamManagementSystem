@@ -1,5 +1,6 @@
 package com.example.petProject.changeRequestFeature.model.entity;
 
+import com.example.petProject.changeRequestFeature.model.ChangeEntityEventListener;
 import com.example.petProject.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.petProject.changeRequestFeature.model.enumTypes.ChangeRequestState;
 import com.example.petProject.changeRequestFeature.model.enumTypes.OperationType;
@@ -7,7 +8,6 @@ import com.example.petProject.model.entity.BaseEntity;
 import com.example.petProject.model.enumTypes.auth.UserRole;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -24,6 +24,7 @@ import java.util.Set;
 @Table(name = "change_request")
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = " is_relevant = true ")
+@EntityListeners(ChangeEntityEventListener.class)
 @SQLDelete(sql = "UPDATE change_request SET is_relevant = 0 WHERE public.change_request.id= ? ", check = ResultCheckStyle.COUNT)
 public class ChangeRequestEntity extends BaseEntity {
 
@@ -55,6 +56,8 @@ public class ChangeRequestEntity extends BaseEntity {
     @Column(name = "new_object_state")
     private String newObjectState;
 
+    @Column(name = "object_type")
+    private String objectType;
 
     @OneToMany(
             targetEntity = ChangeRequestCommentEntity.class,
@@ -79,8 +82,11 @@ public class ChangeRequestEntity extends BaseEntity {
     )
     private Set<ChangeRequestCommentEntity> changeRequestCommentEntities;
 
-    @Column(name = "is_relevent")
+    @Column(name = "is_relevant")
     private boolean isRelevant = true;
+
+    @Column(name = "object_repo")
+    private String objectRepo;
 
     public void setCurrentObjectState(ChangeRequestEntityMarker currentObjectState) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -90,5 +96,10 @@ public class ChangeRequestEntity extends BaseEntity {
     public void setNewObjectState(ChangeRequestEntityMarker newObjectState) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         this.newObjectState = objectMapper.writeValueAsString(newObjectState);
+    }
+
+
+    public void setNewObjectState(String newObjectState) {
+        this.newObjectState = newObjectState;
     }
 }

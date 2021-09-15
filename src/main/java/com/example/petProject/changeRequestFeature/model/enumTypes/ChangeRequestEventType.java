@@ -3,5 +3,7 @@ package com.example.petProject.changeRequestFeature.model.enumTypes;
 public enum ChangeRequestEventType {
     CREATE,
     UPDATE,
-    DELETE
+    DELETE,
+    DECLINE,
+    NOT_VALID
 }

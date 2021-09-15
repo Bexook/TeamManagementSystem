@@ -17,4 +17,5 @@ public class BaseEntity {
     private Date createdAt;
     @Column(name = "modified_at")
     private Date modifiedAt;
+
 }

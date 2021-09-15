@@ -2,6 +2,7 @@ package com.example.petProject.changeRequestFeature.aspect;
 
 import com.example.petProject.changeRequestFeature.annotation.Approver;
 import com.example.petProject.changeRequestFeature.annotation.ChangeRequest;
+import com.example.petProject.changeRequestFeature.changeRequestEvents.eventPublisher.ChangeRequestEventPublisher;
 import com.example.petProject.changeRequestFeature.model.entity.ChangeRequestEntity;
 import com.example.petProject.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.petProject.changeRequestFeature.model.enumTypes.ChangeRequestState;
@@ -10,6 +11,8 @@ import com.example.petProject.configuration.security.userAuthDataConfiguration.A
 import com.example.petProject.exception.RequestApproval;
 import com.example.petProject.model.enumTypes.auth.UserRole;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jackson.JacksonUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -32,6 +35,8 @@ public class ChangeRequestAnnotation {
     private ApplicationContext applicationContext;
     @Autowired
     private ChangeRequestRepository changeRequestRepository;
+    @Autowired
+    private ChangeRequestEventPublisher changeRequestEventPublisher;
 
     @Pointcut("@annotation(com.example.petProject.changeRequestFeature.annotation.ChangeRequest)")
     public void annotationPointCut() {
@@ -44,9 +49,9 @@ public class ChangeRequestAnnotation {
     @Before(value = "annotationPointCut()", argNames = "joinPoint")
     public Object executeAnnotation(JoinPoint joinPoint) throws Throwable {
         AppUserDetails userDetails = (AppUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (userDetails.getUserRole() == UserRole.ADMIN) {
-            return joinPoint;
-        }
+//        if (userDetails.getUserRole() == UserRole.ADMIN) {
+//            return joinPoint;
+//        }
         Class<?> clazz = joinPoint.getTarget().getClass();
 
         ChangeRequest changeRequest = clazz.getMethod(joinPoint.getSignature().getName(), Long.class).getAnnotation(ChangeRequest.class);
@@ -62,6 +67,8 @@ public class ChangeRequestAnnotation {
         changeRequestEntity.setCreatedAt(new Date());
         changeRequestEntity.setUserRole(annotation.userRole());
         changeRequestEntity.setOperationType(changeRequest.operationType());
+        changeRequestEntity.setRelevant(true);
+        changeRequestEntity.setObjectType("type");
         changeRequestOperation(joinPoint, changeRequest, annotation, method, changeRequestEntity);
         changeRequestRepository.save(changeRequestEntity);
 
@@ -73,6 +80,7 @@ public class ChangeRequestAnnotation {
                                         Approver annotation,
                                         Method method,
                                         ChangeRequestEntity changeRequestEntity) throws JsonProcessingException, IllegalAccessException, InvocationTargetException {
+        ObjectMapper objectMapper = new ObjectMapper();
         switch (changeRequest.operationType()) {
             case CREATE: {
                 ChangeRequestEntityMarker changeableObject = (ChangeRequestEntityMarker) joinPoint.getArgs()[0];
@@ -82,16 +90,22 @@ public class ChangeRequestAnnotation {
             case DELETE: {
                 Long changeableObject = (Long) joinPoint.getArgs()[0];
                 ChangeRequestEntityMarker currentObjectState = (ChangeRequestEntityMarker) method.invoke(applicationContext.getBean(annotation.repository()), (Long) changeableObject);
-                //changeRequestEntity.setCurrentObjectState(currentObjectState);
+                changeRequestEntity.setNewObjectState("asvavdvsdvsd");
+                String newObjectState = objectMapper.writeValueAsString(currentObjectState);
+//                changeRequestEntity.setNewObjectState(newObjectState);
                 break;
             }
-            default: {
+            case UPDATE: {
                 ChangeRequestEntityMarker changeableObject = (ChangeRequestEntityMarker) joinPoint.getArgs()[0];
                 ChangeRequestEntityMarker currentObjectState = (ChangeRequestEntityMarker) method.invoke(applicationContext.getBean(annotation.repository()), (Long) changeableObject.getId());
                 changeRequestEntity.setNewObjectState(changeableObject);
                 changeRequestEntity.setCurrentObjectState(currentObjectState);
                 break;
             }
+            default: {
+                throw new IllegalArgumentException("Change request operation does not exist");
+            }
         }
+        changeRequestEntity.setObjectRepo(annotation.repository().toString());
     }
 }

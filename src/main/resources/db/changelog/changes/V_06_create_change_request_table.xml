@@ -25,13 +25,22 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             </column>
             <column name="new_object_state" type="VARCHAR(5000)">
             </column>
+            <column name="object_type" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
             <column name="created_at" type="date">
                 <constraints nullable="false"/>
             </column>
             <column name="modified_at" type="date">
                 <constraints nullable="true"/>
             </column>
+            <column name="modified_by" type="VARCHAR(150)">
+                <constraints nullable="true"/>
+            </column>
             <column name="is_relevant" type="BIT" value="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="object_repo" type="VARCHAR(256)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

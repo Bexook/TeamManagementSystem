@@ -1,17 +1,22 @@
 package com.example.petProject.changeRequestFeature.service;
 
+import com.example.petProject.changeRequestFeature.model.dto.ChangeRequestReviewDTO;
 import com.example.petProject.changeRequestFeature.model.entity.ChangeRequestEntity;
+import com.example.petProject.changeRequestFeature.model.enumTypes.SearchCriteria;
+import org.springframework.data.domain.Page;
+
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface ChangeRequestService {
 
-    void save(ChangeRequestEntity changeRequestEntity);
-
-    void update(ChangeRequestEntity changeRequestEntity);
+    ChangeRequestReviewDTO update(ChangeRequestReviewDTO changeRequestReviewDTO) throws ClassNotFoundException;
 
     ChangeRequestEntity getById(Long id);
 
-    List<ChangeRequestEntity> getByUsername(String username);
+    Page<ChangeRequestEntity> getByCriteria(SearchCriteria searchCriteria, Object searchValue, Pageable pageable);
+
+    Page<ChangeRequestEntity> findAll(Pageable pageable);
 
 }
