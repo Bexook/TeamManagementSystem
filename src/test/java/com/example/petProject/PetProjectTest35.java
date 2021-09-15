@@ -10,10 +10,4 @@ import java.io.IOException;
 
 class PetProjectTest35 extends SpringTestRunner {
 
-    @Test
-    void contextLoads96() {
-       String string =  RestAssured.get("http://localhost:" + port + "/getAll").asString();
-        Assert.notNull(string);
-    }
-
 }

@@ -6,4 +6,7 @@
     <include file="/db/changelog/changes/V_01_create_user_table.xml"/>
     <include file="/db/changelog/changes/V_02_insert_values_user_table.xml"/>
     <include file="/db/changelog/changes/V_03_create_team_member_table.xml"/>
+    <include file="/db/changelog/changes/V_04_insert_values_team_member_table.xml"/>
+    <include file="/db/changelog/changes/V_06_create_change_request_table.xml"/>
+
 </databaseChangeLog>

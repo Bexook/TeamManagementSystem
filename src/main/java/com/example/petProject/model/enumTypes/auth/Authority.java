@@ -6,7 +6,8 @@ public enum Authority implements GrantedAuthority {
     READ("READ"),
     UPDATE("UPDATE"),
     CREATE("CREATE"),
-    DELETE("DELETE");
+    DELETE("DELETE"),
+    APPROVE("APPROVE");
 
     private final String authority;
 

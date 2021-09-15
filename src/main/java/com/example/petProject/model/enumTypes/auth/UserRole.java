@@ -7,7 +7,7 @@ import java.util.List;
 
 @Log4j2
 public enum UserRole {
-    ADMIN(AccessType.ALL, Authority.CREATE, Authority.DELETE, Authority.READ, Authority.UPDATE),
+    ADMIN(AccessType.ALL, Authority.CREATE, Authority.DELETE, Authority.READ, Authority.UPDATE, Authority.APPROVE),
     USER(AccessType.USER, Authority.DELETE, Authority.READ),
     ANONYMOUS(AccessType.PUBLIC, Authority.READ);
     private final List<Authority> authority;
