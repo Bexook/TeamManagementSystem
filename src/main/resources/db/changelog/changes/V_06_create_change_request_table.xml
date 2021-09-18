@@ -65,6 +65,9 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             <column name="modified_by" type="VARCHAR(150)">
                 <constraints nullable="true"/>
             </column>
+            <column name="is_relevant" type="BIT" value="true">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
 

@@ -6,21 +6,24 @@ import com.example.TeamManagementSystem.changeRequestFeature.model.ChangeEntityE
 import com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.ChangeRequestState;
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.hibernate.annotations.ResultCheckStyle;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Data
 @Entity
-@ToString
 @Table(name = "change_request")
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = " is_relevant = true ")
@@ -61,8 +64,8 @@ public class ChangeRequestEntity extends BaseEntity {
 
     @OneToMany(
             targetEntity = ChangeRequestCommentEntity.class,
-            cascade = CascadeType.PERSIST,
-            orphanRemoval = true
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
     @JoinTable(name = "change_request_comments_ref",
             joinColumns = {
@@ -74,32 +77,19 @@ public class ChangeRequestEntity extends BaseEntity {
                     )},
             inverseJoinColumns = {
                     @JoinColumn(
-                            name = "comments_id",
+                            name = "comment_id",
                             referencedColumnName = "id",
                             table = "change_request_comment",
                             foreignKey = @ForeignKey(name = "comment_id_fk")
                     )}
     )
+    @Fetch(FetchMode.JOIN)
     private Set<ChangeRequestCommentEntity> changeRequestCommentEntities;
 
     @Column(name = "is_relevant")
-    private boolean isRelevant = true;
+    private boolean relevant = true;
 
     @Column(name = "object_repo")
     private String objectRepo;
 
-    public void setCurrentObjectState(ChangeRequestEntityMarker currentObjectState) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        this.currentObjectState = objectMapper.writeValueAsString(currentObjectState);
-    }
-
-    public void setNewObjectState(ChangeRequestEntityMarker newObjectState) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        this.newObjectState = objectMapper.writeValueAsString(newObjectState);
-    }
-
-
-    public void setNewObjectState(String newObjectState) {
-        this.newObjectState = newObjectState;
-    }
 }

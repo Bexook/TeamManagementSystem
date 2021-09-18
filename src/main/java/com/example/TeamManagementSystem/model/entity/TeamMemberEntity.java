@@ -48,7 +48,7 @@ import javax.persistence.*;
 @Filter(name = "filterByRole", condition = "team_member_role = :role")
 @FilterDef(name = "filterByRoleDef", parameters = @ParamDef(name = "role", type = "String"))
 @SQLDelete(sql = "UPDATE app_user SET is_active = 0 WHERE public.app_user.id= ? ", check = ResultCheckStyle.COUNT)
-public class TeamMemberEntity extends BaseEntity implements ChangeRequestEntityMarker<Long> {
+public class TeamMemberEntity extends BaseEntity implements ChangeRequestEntityMarker {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

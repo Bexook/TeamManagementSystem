@@ -51,9 +51,9 @@ public class ChangeRequestAdminOperationResource {
 
     @GetMapping("/get-list")
     @PreAuthorize("@userAccessValidation.hasAuthority('APPROVE')")
-    public Page<ChangeRequestEntity> getAllChangeRequests(@RequestParam(defaultValue = DEFAULT_PAGE_SIZE, required = false, name = "size") Integer size,
+    public ResponseEntity<Page<ChangeRequestEntity>> getAllChangeRequests(@RequestParam(defaultValue = DEFAULT_PAGE_SIZE, required = false, name = "size") Integer size,
                                                                           @RequestParam(defaultValue = DEFAULT_PAGE_NUMBER, required = false, name = "page") Integer page) {
-        return changeRequestService.findAll(PageRequest.of(10, size));
+        return ResponseEntity.ok().body(changeRequestService.findAll(PageRequest.of(page, size)));
     }
 
     @GetMapping("/get-by-criteria")

@@ -1,6 +1,8 @@
 package com.example.TeamManagementSystem.exception;
 
-public class RequestApproval extends Exception {
+import org.apache.http.HttpException;
+
+public class RequestApproval extends HttpException {
 
     public RequestApproval() {
     }
@@ -13,11 +15,5 @@ public class RequestApproval extends Exception {
         super(message, cause);
     }
 
-    public RequestApproval(Throwable cause) {
-        super(cause);
-    }
 
-    public RequestApproval(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
 }

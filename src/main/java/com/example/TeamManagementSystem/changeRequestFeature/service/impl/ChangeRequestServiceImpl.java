@@ -89,7 +89,7 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
                 break;
             }
             case PENDING: {
-                changeRequestEventPublisher.publishChangeRequestEvent(this, new ChangeRequestEventDTO("PENDING change request", ChangeRequestEventType.UPDATE, cr));
+                changeRequestEventPublisher.publishChangeRequestEvent(this, new ChangeRequestEventDTO("PENDING change request", ChangeRequestEventType.UPDATE, cr, cr.getOperationType()));
                 break;
             }
             default:
@@ -99,22 +99,22 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
 
     private void requestChanges(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) {
         changeRequestCommentService.addAllComments(changeRequestReviewDTO.getComment());
-        changeRequestEventPublisher.publishChangeRequestEvent(this, new ChangeRequestEventDTO("Require changes", ChangeRequestEventType.NOT_VALID, cr));
+        changeRequestEventPublisher.publishChangeRequestEvent(this, new ChangeRequestEventDTO("Require changes", ChangeRequestEventType.NOT_VALID, cr, cr.getOperationType()));
     }
 
     private void declineChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) {
         cr.setChangeRequestState(changeRequestReviewDTO.getChangeRequestEntity().getChangeRequestState());
         cr.setRelevant(false);
-        ChangeRequestEventDTO changeRequestEventDTO = new ChangeRequestEventDTO("Change Request  has been DECLINED!", ChangeRequestEventType.DECLINE, cr);
+        ChangeRequestEventDTO changeRequestEventDTO = new ChangeRequestEventDTO("Change Request  has been DECLINED!", ChangeRequestEventType.DECLINE, cr, cr.getOperationType());
         changeRequestEventPublisher.publishChangeRequestEvent(this, changeRequestEventDTO);
     }
 
 
     private void approveChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) throws ClassNotFoundException {
         cr.setChangeRequestState(changeRequestReviewDTO.getChangeRequestEntity().getChangeRequestState());
-        JpaRepository jpaRepository = (JpaRepository) entityManager.unwrap(Class.forName(cr.getObjectRepo()));
-        jpaRepository.save(cr);
-        ChangeRequestEventDTO changeRequestEventDTO = new ChangeRequestEventDTO("Change Request  has been APPROVED!", ChangeRequestEventType.UPDATE, cr);
+//        JpaRepository jpaRepository = (JpaRepository) entityManager.unwrap(Class.forName(cr.getObjectRepo()));
+//        jpaRepository.save(cr);
+        ChangeRequestEventDTO changeRequestEventDTO = new ChangeRequestEventDTO("Change Request  has been APPROVED!", ChangeRequestEventType.UPDATE, cr, cr.getOperationType());
         changeRequestEventPublisher.publishChangeRequestEvent(this, changeRequestEventDTO);
     }
 

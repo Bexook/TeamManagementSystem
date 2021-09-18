@@ -40,12 +40,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(Transactional.TxType.REQUIRES_NEW)
     @ChangeRequest(operationType = OperationType.DELETE)
     public void deleteById(Long id) {
         UserEntity userEntity = userRepository.getById(id);
         userRepository.delete(userEntity);
-        userRepository.getById(userEntity.getId());
     }
 
     @Override

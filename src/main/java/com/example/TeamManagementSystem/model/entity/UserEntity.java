@@ -18,7 +18,7 @@ import javax.persistence.*;
 @SQLDelete(sql = "UPDATE app_user SET is_active = 0 WHERE public.app_user.id= ? ", check = ResultCheckStyle.COUNT)
 @FilterDef(name = "activeFilter", parameters = @ParamDef(name = "isActive", type = "boolean"))
 @Filter(name = "activeFilter", condition = "is_active=:isActive")
-public class UserEntity extends BaseEntity implements ChangeRequestEntityMarker<Long> {
+public class UserEntity extends BaseEntity implements ChangeRequestEntityMarker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
