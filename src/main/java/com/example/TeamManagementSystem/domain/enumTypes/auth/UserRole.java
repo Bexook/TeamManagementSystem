@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.model.enumTypes.auth;
+package com.example.TeamManagementSystem.domain.enumTypes.auth;
 
 import lombok.extern.log4j.Log4j2;
 

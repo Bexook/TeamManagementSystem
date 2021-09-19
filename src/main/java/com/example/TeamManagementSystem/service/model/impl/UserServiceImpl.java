@@ -3,10 +3,13 @@ package com.example.TeamManagementSystem.service.model.impl;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
-import com.example.TeamManagementSystem.model.entity.UserEntity;
-import com.example.TeamManagementSystem.model.enumTypes.auth.UserRole;
+import com.example.TeamManagementSystem.domain.dto.UserDTO;
+import com.example.TeamManagementSystem.domain.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
+import com.example.TeamManagementSystem.mapper.UserMapper;
 import com.example.TeamManagementSystem.repository.UserRepository;
 import com.example.TeamManagementSystem.service.model.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +29,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private EntityManager entityManager;
+    private UserMapper userMapper;
 
     @Override
-    public UserEntity getUserById(@NonNull Long id) {
-        return userRepository.getById(id);
+    public UserDTO getUserById(@NonNull Long id) {
+        return userMapper.toUserDTO(userRepository.getById(id));
     }
 
     @Override
@@ -47,16 +51,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public UserDTO findByEmail(String email) {
+        return userMapper.toUserDTO(userRepository.findByEmail(email));
     }
 
     @Override
-    public List<UserEntity> findAll(boolean isActive) {
+    public List<UserDTO> findAll(boolean isActive) {
         Session session = entityManager.unwrap(Session.class);
         session.enableFilter("activeFilter").setParameter("isActive", isActive);
         List<UserEntity> userEntityList = userRepository.findAll();
         session.disableFilter("activeFilter");
-        return userEntityList;
+        return userMapper.toUserDTOList(userEntityList);
     }
 }

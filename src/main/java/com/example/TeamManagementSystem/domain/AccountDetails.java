@@ -1,7 +1,7 @@
-package com.example.TeamManagementSystem.model;
+package com.example.TeamManagementSystem.domain;
 
-import com.example.TeamManagementSystem.model.entity.UserEntity;
-import com.example.TeamManagementSystem.model.entity.TeamMemberEntity;
+import com.example.TeamManagementSystem.domain.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

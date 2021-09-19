@@ -1,13 +1,13 @@
 package com.example.TeamManagementSystem.service.model.impl;
 
-import com.example.TeamManagementSystem.model.entity.UserEntity;
-import com.example.TeamManagementSystem.model.enumTypes.auth.UserRole;
+import com.example.TeamManagementSystem.domain.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.repository.TeamMemberRepository;
 import com.example.TeamManagementSystem.service.model.UserService;
-import com.example.TeamManagementSystem.model.dto.TeamMemberDTO;
-import com.example.TeamManagementSystem.model.dto.UserRegisterDTO;
-import com.example.TeamManagementSystem.model.entity.TeamMemberEntity;
-import com.example.TeamManagementSystem.model.enumTypes.TeamMemberRole;
+import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
+import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
+import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
+import com.example.TeamManagementSystem.domain.enumTypes.TeamMemberRole;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
 import javassist.tools.web.BadHttpRequest;
 import lombok.NonNull;

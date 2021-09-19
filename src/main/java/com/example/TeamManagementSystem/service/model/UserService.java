@@ -1,6 +1,7 @@
 package com.example.TeamManagementSystem.service.model;
 
-import com.example.TeamManagementSystem.model.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.dto.UserDTO;
+import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import lombok.NonNull;
 
 import java.util.List;
@@ -9,13 +10,13 @@ import java.util.List;
 public interface UserService {
 
 
-    UserEntity getUserById(@NonNull Long id);
+    UserDTO getUserById(@NonNull Long id);
 
     boolean registerUser(@NonNull UserEntity userEntity);
 
     void deleteById(Long id);
 
-    UserEntity findByEmail(String email);
+    UserDTO findByEmail(String email);
 
-    List<UserEntity> findAll(boolean isActive);
+    List<UserDTO> findAll(boolean isActive);
 }

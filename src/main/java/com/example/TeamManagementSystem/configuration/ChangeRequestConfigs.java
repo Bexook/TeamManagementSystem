@@ -2,7 +2,9 @@ package com.example.TeamManagementSystem.configuration;
 
 import com.example.TeamManagementSystem.changeRequestFeature.configs.ChangeRequestRepositoriesConfiguration;
 import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
-import com.example.TeamManagementSystem.model.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
+import com.example.TeamManagementSystem.domain.entity.UserEntity;
+import com.example.TeamManagementSystem.repository.TeamMemberRepository;
 import com.example.TeamManagementSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +24,10 @@ public class ChangeRequestConfigs implements ChangeRequestRepositoriesConfigurat
     private EntityManager entityManager;
     @Autowired
     private UserRepository userRepository;
-    Map<String, Supplier<?>> userRepositoryOperation;
+    @Autowired
+    private TeamMemberRepository teamMemberRepository;
+    private Map<String, Supplier<?>> userRepositoryOperation;
+    private Map<String, Supplier<?>> teamMemberRepoOperation;
 
     @Bean
     @Override
@@ -30,6 +35,7 @@ public class ChangeRequestConfigs implements ChangeRequestRepositoriesConfigurat
         Sources<Long> sources = new Sources<>(entityManager);
         sources.addOperation(List.class, userRepositoryOperation);
         sources.addRepository(UserEntity.class, userRepository);
+        sources.addRepository(TeamMemberEntity.class, teamMemberRepository);
         return sources;
     }
 
@@ -38,5 +44,9 @@ public class ChangeRequestConfigs implements ChangeRequestRepositoriesConfigurat
     public void afterPropertiesSet() throws Exception {
         userRepositoryOperation = new HashMap<>();
         userRepositoryOperation.put("findAll(UserEntity)", userRepository::findAll);
+
+        teamMemberRepoOperation = new HashMap<>();
+        teamMemberRepoOperation.put("findAll(TeamMemberEntity)", teamMemberRepository::findAll);
+
     }
 }

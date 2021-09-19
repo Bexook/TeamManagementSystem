@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.model.entity;
+package com.example.TeamManagementSystem.domain.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

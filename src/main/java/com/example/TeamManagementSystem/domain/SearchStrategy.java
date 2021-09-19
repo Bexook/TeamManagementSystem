@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.model;
+package com.example.TeamManagementSystem.domain;
 
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.SearchCriteria;
 import lombok.Data;

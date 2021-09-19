@@ -1,8 +1,8 @@
-package com.example.TeamManagementSystem.model.entity;
+package com.example.TeamManagementSystem.domain.entity;
 
 import com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
-import com.example.TeamManagementSystem.model.dto.TeamMemberDTO;
-import com.example.TeamManagementSystem.model.enumTypes.TeamMemberRole;
+import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
+import com.example.TeamManagementSystem.domain.enumTypes.TeamMemberRole;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

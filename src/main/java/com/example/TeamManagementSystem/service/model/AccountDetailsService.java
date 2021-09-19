@@ -1,7 +1,7 @@
 package com.example.TeamManagementSystem.service.model;
 
-import com.example.TeamManagementSystem.model.dto.TeamMemberDTO;
-import com.example.TeamManagementSystem.model.entity.TeamMemberEntity;
+import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
+import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.example.TeamManagementSystem.changeRequestFeature.model.entity;
 
-import com.example.TeamManagementSystem.model.entity.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.TeamManagementSystem.domain.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.ResultCheckStyle;

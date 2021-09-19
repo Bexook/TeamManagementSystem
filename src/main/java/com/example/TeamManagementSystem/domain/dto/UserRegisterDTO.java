@@ -1,6 +1,6 @@
-package com.example.TeamManagementSystem.model.dto;
+package com.example.TeamManagementSystem.domain.dto;
 
-import com.example.TeamManagementSystem.model.enumTypes.TeamMemberRole;
+import com.example.TeamManagementSystem.domain.enumTypes.TeamMemberRole;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

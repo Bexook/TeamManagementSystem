@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.model.enumTypes.auth;
+package com.example.TeamManagementSystem.domain.enumTypes.auth;
 
 import org.springframework.security.core.GrantedAuthority;
 

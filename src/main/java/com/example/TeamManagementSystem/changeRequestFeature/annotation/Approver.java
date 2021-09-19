@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.changeRequestFeature.annotation;
 
-import com.example.TeamManagementSystem.model.enumTypes.auth.UserRole;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

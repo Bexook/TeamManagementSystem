@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.controller.mvc;
 
-import com.example.TeamManagementSystem.model.dto.UserRegisterDTO;
+import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
 import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;

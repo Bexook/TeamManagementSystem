@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.model.enumTypes;
+package com.example.TeamManagementSystem.domain.enumTypes;
 
 import java.util.Arrays;
 

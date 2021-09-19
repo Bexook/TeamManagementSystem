@@ -5,7 +5,7 @@ import com.example.TeamManagementSystem.changeRequestFeature.model.entity.Change
 import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestEntity;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestService;
-import com.example.TeamManagementSystem.model.SearchStrategy;
+import com.example.TeamManagementSystem.domain.SearchStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

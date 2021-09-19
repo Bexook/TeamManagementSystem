@@ -2,8 +2,8 @@ package com.example.TeamManagementSystem.service.model.impl;
 
 import com.example.TeamManagementSystem.service.model.AccountDetailsService;
 import com.example.TeamManagementSystem.service.model.UserService;
-import com.example.TeamManagementSystem.model.dto.TeamMemberDTO;
-import com.example.TeamManagementSystem.model.entity.TeamMemberEntity;
+import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
+import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

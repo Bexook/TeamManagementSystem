@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.controller.rest;
 
-import com.example.TeamManagementSystem.model.UserCredentials;
+import com.example.TeamManagementSystem.domain.UserCredentials;
 import com.example.TeamManagementSystem.configuration.security.service.JWTService;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;

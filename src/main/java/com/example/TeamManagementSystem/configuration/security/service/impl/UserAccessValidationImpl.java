@@ -2,9 +2,9 @@ package com.example.TeamManagementSystem.configuration.security.service.impl;
 
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetails;
 import com.example.TeamManagementSystem.configuration.security.service.UserAccessValidation;
-import com.example.TeamManagementSystem.model.enumTypes.auth.AccessType;
-import com.example.TeamManagementSystem.model.enumTypes.auth.Authority;
-import com.example.TeamManagementSystem.model.enumTypes.auth.UserRole;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.AccessType;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.Authority;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 

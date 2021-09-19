@@ -1,7 +1,7 @@
 package com.example.TeamManagementSystem.controller.mvc;
 
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetails;
-import com.example.TeamManagementSystem.model.dto.TeamMemberDTO;
+import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
 import com.example.TeamManagementSystem.service.model.AccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,18 +1,12 @@
 package com.example.TeamManagementSystem.changeRequestFeature.model.entity;
 
-import com.example.TeamManagementSystem.model.entity.BaseEntity;
-import com.example.TeamManagementSystem.model.enumTypes.auth.UserRole;
+import com.example.TeamManagementSystem.domain.entity.BaseEntity;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.changeRequestFeature.model.ChangeEntityEventListener;
-import com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.ChangeRequestState;
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;

@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration;
 
-import com.example.TeamManagementSystem.model.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

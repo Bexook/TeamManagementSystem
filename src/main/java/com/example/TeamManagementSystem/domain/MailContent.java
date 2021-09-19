@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.model;
+package com.example.TeamManagementSystem.domain;
 
 import lombok.Builder;
 import lombok.Data;

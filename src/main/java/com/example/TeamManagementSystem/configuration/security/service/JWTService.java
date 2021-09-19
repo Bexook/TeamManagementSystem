@@ -1,9 +1,9 @@
 package com.example.TeamManagementSystem.configuration.security.service;
 
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetails;
-import com.example.TeamManagementSystem.model.UserCredentials;
-import com.example.TeamManagementSystem.model.enumTypes.auth.Authority;
-import com.example.TeamManagementSystem.model.enumTypes.auth.UserRole;
+import com.example.TeamManagementSystem.domain.UserCredentials;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.Authority;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import org.apache.tomcat.websocket.AuthenticationException;
 
 import javax.servlet.http.HttpServletRequest;

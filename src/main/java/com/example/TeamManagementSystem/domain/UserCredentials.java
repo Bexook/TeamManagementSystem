@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.model;
+package com.example.TeamManagementSystem.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

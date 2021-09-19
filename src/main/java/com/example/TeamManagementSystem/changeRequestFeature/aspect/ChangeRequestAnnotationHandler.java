@@ -13,7 +13,7 @@ import com.example.TeamManagementSystem.configuration.security.userAuthDataConfi
 import com.example.TeamManagementSystem.exception.RequestApproval;
 import com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.ChangeRequestState;
-import com.example.TeamManagementSystem.model.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.JoinPoint;
@@ -21,18 +21,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.SystemException;
 import javax.transaction.Transactional;
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
