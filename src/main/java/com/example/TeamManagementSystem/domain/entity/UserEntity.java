@@ -1,16 +1,17 @@
 package com.example.TeamManagementSystem.domain.entity;
 
-import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 @Data
@@ -50,10 +51,17 @@ public class UserEntity extends BaseEntity implements ChangeRequestEntityMarker 
     @Column(name = "is_email_verified")
     private boolean isEmailVerified;
 
+    @Fetch(value = FetchMode.JOIN)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "app_user_time_log",
+            joinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "time_log_id", referencedColumnName = "id")
+            }
 
-    @JoinColumn(name = "time_log_id")
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<TimeLogEntity> timeLog;
-
+    )
+    private List<TimeLogEntity> timeLog;
 
 }

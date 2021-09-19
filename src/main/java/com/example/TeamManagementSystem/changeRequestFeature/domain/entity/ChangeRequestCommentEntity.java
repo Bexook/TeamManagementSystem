@@ -28,28 +28,8 @@ public class ChangeRequestCommentEntity extends BaseEntity {
     @Column(name = "comment_by")
     private String commentBy;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "change_request_comments_ref",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "comment_id",
-                            referencedColumnName = "id",
-                            table = "change_request_comment",
-                            foreignKey = @ForeignKey(name = "comment_id_fk")
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
-                            name = "change_request_id",
-                            referencedColumnName = "id",
-                            table = "change_request",
-                            foreignKey = @ForeignKey(name = "change_request_id_fk")
-                    )
-            }
-    )
-    private ChangeRequestEntity changeRequestEntity;
-
     @Column(name = "is_relevant")
     private boolean relevant = true;
+
 
 }

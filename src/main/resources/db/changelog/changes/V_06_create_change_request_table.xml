@@ -43,9 +43,6 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             <column name="object_repo" type="VARCHAR(256)">
                 <constraints nullable="false"/>
             </column>
-            <column name="target_method_properties" type="VARCHAR(5000)">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
 
 
