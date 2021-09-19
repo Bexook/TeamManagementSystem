@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.changeRequestFeature.model.entity;
+package com.example.TeamManagementSystem.changeRequestFeature.domain.entity;
 
 import com.example.TeamManagementSystem.domain.entity.BaseEntity;
 import lombok.Data;

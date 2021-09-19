@@ -1,10 +1,10 @@
-package com.example.TeamManagementSystem.changeRequestFeature.model.entity;
+package com.example.TeamManagementSystem.changeRequestFeature.domain.entity;
 
 import com.example.TeamManagementSystem.domain.entity.BaseEntity;
 import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
-import com.example.TeamManagementSystem.changeRequestFeature.model.ChangeEntityEventListener;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.ChangeRequestState;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.ChangeEntityEventListener;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.ChangeRequestState;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.OperationType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
@@ -53,8 +53,8 @@ public class ChangeRequestEntity extends BaseEntity {
     @Column(name = "new_object_state")
     private String newObjectState;
 
-    @Column(name = "object_type")
-    private String objectType;
+    @Column(name = "domain_class")
+    private String domainClass;
 
     @OneToMany(
             targetEntity = ChangeRequestCommentEntity.class,
@@ -85,5 +85,6 @@ public class ChangeRequestEntity extends BaseEntity {
 
     @Column(name = "object_repo")
     private String objectRepo;
+
 
 }

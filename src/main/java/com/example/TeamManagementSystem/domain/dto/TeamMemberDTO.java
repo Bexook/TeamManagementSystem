@@ -1,6 +1,5 @@
 package com.example.TeamManagementSystem.domain.dto;
 
-import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.domain.enumTypes.TeamMemberRole;
 import lombok.Data;
 import lombok.NoArgsConstructor;

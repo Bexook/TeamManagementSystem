@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker;
+package com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker;
 
 import java.io.Serializable;
 

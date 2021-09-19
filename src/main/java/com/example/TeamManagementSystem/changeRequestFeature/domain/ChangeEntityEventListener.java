@@ -1,7 +1,7 @@
-package com.example.TeamManagementSystem.changeRequestFeature.model;
+package com.example.TeamManagementSystem.changeRequestFeature.domain;
 
 
-import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

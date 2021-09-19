@@ -1,23 +1,24 @@
 package com.example.TeamManagementSystem.changeRequestFeature.service.impl;
 
 import com.example.TeamManagementSystem.changeRequestFeature.SearchFunction;
-import com.example.TeamManagementSystem.changeRequestFeature.changeRequestEvents.eventPublisher.ChangeRequestEventPublisher;
-import com.example.TeamManagementSystem.changeRequestFeature.model.dto.ChangeRequestEventDTO;
-import com.example.TeamManagementSystem.changeRequestFeature.model.dto.ChangeRequestReviewDTO;
-import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestEntity;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.ChangeRequestEventType;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.SearchCriteria;
+import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestReviewDTO;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.SearchCriteria;
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestRepository;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestService;
+import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,9 +33,9 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
     @Autowired
     private ChangeRequestCommentService changeRequestCommentService;
     @Autowired
-    private ChangeRequestEventPublisher changeRequestEventPublisher;
+    private Sources<Long> sources;
     @Autowired
-    private EntityManager entityManager;
+    private ObjectMapper objectMapper;
 
     private Map<SearchCriteria, SearchFunction<ChangeRequestRepository, ChangeRequestEntity>> searchFunctionsMap;
 
@@ -42,12 +43,14 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
         searchFunctionsMap = new HashMap<>();
         searchFunctionsMap.put(SearchCriteria.BY_CREATION_DATE, (object, repo, pageable) -> repo.findByCreatedAt((Date) object, pageable));
         searchFunctionsMap.put(SearchCriteria.BY_USERNAME, (object, repo, pageable) -> repo.findByCreatedBy(String.valueOf(object), pageable));
-        searchFunctionsMap.put(SearchCriteria.BY_OBJECT_TYPE, (object, repo, pageable) -> repo.findByObjectType(String.valueOf(object), pageable));
+        searchFunctionsMap.put(SearchCriteria.BY_OBJECT_TYPE, (object, repo, pageable) -> repo.findByDomainClass(String.valueOf(object), pageable));
         searchFunctionsMap.put(SearchCriteria.BY_LAST_MODIFICATION_DATE, (object, repo, pageable) -> repo.findByModifiedAt((Date) object, pageable));
         searchFunctionsMap.put(SearchCriteria.BY_MODIFIED_BY, (object, repo, pageable) -> repo.findByModifiedBy(String.valueOf(object), pageable));
     }
 
+
     @Override
+    @SneakyThrows
     @Transactional
     @PreAuthorize("@userAccessValidation.hasAuthority('APPROVE')")
     public ChangeRequestReviewDTO update(ChangeRequestReviewDTO changeRequestReviewDTO) throws ClassNotFoundException {
@@ -74,7 +77,7 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
     }
 
 
-    private void proceedChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) throws ClassNotFoundException {
+    private void proceedChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) throws ClassNotFoundException, JsonProcessingException {
         switch (changeRequestReviewDTO.getChangeRequestEntity().getChangeRequestState()) {
             case APPROVED: {
                 approveChangeRequest(changeRequestReviewDTO, cr);
@@ -89,7 +92,6 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
                 break;
             }
             case PENDING: {
-                changeRequestEventPublisher.publishChangeRequestEvent(this, new ChangeRequestEventDTO("PENDING change request", ChangeRequestEventType.UPDATE, cr, cr.getOperationType()));
                 break;
             }
             default:
@@ -99,23 +101,19 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
 
     private void requestChanges(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) {
         changeRequestCommentService.addAllComments(changeRequestReviewDTO.getComment());
-        changeRequestEventPublisher.publishChangeRequestEvent(this, new ChangeRequestEventDTO("Require changes", ChangeRequestEventType.NOT_VALID, cr, cr.getOperationType()));
     }
 
     private void declineChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) {
         cr.setChangeRequestState(changeRequestReviewDTO.getChangeRequestEntity().getChangeRequestState());
         cr.setRelevant(false);
-        ChangeRequestEventDTO changeRequestEventDTO = new ChangeRequestEventDTO("Change Request  has been DECLINED!", ChangeRequestEventType.DECLINE, cr, cr.getOperationType());
-        changeRequestEventPublisher.publishChangeRequestEvent(this, changeRequestEventDTO);
     }
 
 
-    private void approveChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) throws ClassNotFoundException {
+    private void approveChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) throws ClassNotFoundException, JsonProcessingException {
+        Class<?> domainClass = Class.forName(cr.getDomainClass());
+        ChangeRequestEntityMarker entity = (ChangeRequestEntityMarker) objectMapper.readValue(cr.getNewObjectState(), domainClass);
+        sources.loadRepository(domainClass).save(entity);
         cr.setChangeRequestState(changeRequestReviewDTO.getChangeRequestEntity().getChangeRequestState());
-//        JpaRepository jpaRepository = (JpaRepository) entityManager.unwrap(Class.forName(cr.getObjectRepo()));
-//        jpaRepository.save(cr);
-        ChangeRequestEventDTO changeRequestEventDTO = new ChangeRequestEventDTO("Change Request  has been APPROVED!", ChangeRequestEventType.UPDATE, cr, cr.getOperationType());
-        changeRequestEventPublisher.publishChangeRequestEvent(this, changeRequestEventDTO);
     }
 
 }

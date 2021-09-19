@@ -1,6 +1,6 @@
-package com.example.TeamManagementSystem.changeRequestFeature.model.dto;
+package com.example.TeamManagementSystem.changeRequestFeature.domain.dto;
 
-import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

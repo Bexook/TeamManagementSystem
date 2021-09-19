@@ -2,7 +2,7 @@ package com.example.TeamManagementSystem.service.model.impl;
 
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.OperationType;
 import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
@@ -24,13 +24,12 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Service
-@Approver(repository = TeamMemberRepository.class)
+@Approver(repository = TeamMemberRepository.class,domainClass = TeamMemberEntity.class)
 public class TeamMemberServiceImpl implements TeamMemberService {
 
     @Autowired

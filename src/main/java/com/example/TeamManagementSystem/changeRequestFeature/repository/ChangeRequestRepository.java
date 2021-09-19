@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.changeRequestFeature.repository;
 
-import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +16,7 @@ public interface ChangeRequestRepository extends JpaRepository<ChangeRequestEnti
 
     Page<ChangeRequestEntity> findByCreatedAt(Date createdAt, Pageable pageable);
 
-    Page<ChangeRequestEntity> findByObjectType(String objectType, Pageable pageable);
+    Page<ChangeRequestEntity> findByDomainClass(String domainClass, Pageable pageable);
 
     Page<ChangeRequestEntity> findByModifiedAt(Date modifiedAt, Pageable pageable);
 

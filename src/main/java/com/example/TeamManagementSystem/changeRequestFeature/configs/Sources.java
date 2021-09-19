@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.changeRequestFeature.configs;
 
-import com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -37,7 +37,7 @@ public class Sources<ID extends Number> {
         this.repositories.put(domainClass, repository);
     }
 
-    private <T> JpaRepository<T, ID> loadRepository(Class<T> domainClass) {
+    public <T extends ChangeRequestEntityMarker> JpaRepository<T, ID> loadRepository(Class<?> domainClass) {
         return (JpaRepository<T, ID>) this.repositories.get(domainClass);
     }
 
@@ -51,7 +51,7 @@ public class Sources<ID extends Number> {
         return operation.get();
     }
 
-    public <E> E executePersistFunction(Class<E> domainClass, Function<SimpleJpaRepository<ChangeRequestEntityMarker, ? extends Number>, ChangeRequestEntityMarker> function) {
+    public <E extends ChangeRequestEntityMarker> E executeRepositoryFunction(Class<E> domainClass, Function<SimpleJpaRepository<ChangeRequestEntityMarker, ? extends Number>, ChangeRequestEntityMarker> function) {
         return (E) function.apply((SimpleJpaRepository<ChangeRequestEntityMarker, ? extends Number>) loadRepository(domainClass));
     }
 

@@ -2,10 +2,9 @@ package com.example.TeamManagementSystem.service.model.impl;
 
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.OperationType;
 import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
 import com.example.TeamManagementSystem.repository.UserRepository;
 import com.example.TeamManagementSystem.service.model.UserService;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@Approver(repository = UserRepository.class)
+@Approver(repository = UserRepository.class, domainClass = UserEntity.class)
 public class UserServiceImpl implements UserService {
 
     @Autowired

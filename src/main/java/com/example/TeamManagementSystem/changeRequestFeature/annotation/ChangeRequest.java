@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.changeRequestFeature.annotation;
 
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.OperationType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

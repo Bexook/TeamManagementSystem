@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.domain.entity;
 
-import com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
 import com.example.TeamManagementSystem.domain.enumTypes.CalendarDayType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

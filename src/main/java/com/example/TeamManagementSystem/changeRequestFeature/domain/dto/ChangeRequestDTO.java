@@ -1,8 +1,8 @@
-package com.example.TeamManagementSystem.changeRequestFeature.model.dto;
+package com.example.TeamManagementSystem.changeRequestFeature.domain.dto;
 
-import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestCommentEntity;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.ChangeRequestState;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestCommentEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.ChangeRequestState;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.OperationType;
 import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;

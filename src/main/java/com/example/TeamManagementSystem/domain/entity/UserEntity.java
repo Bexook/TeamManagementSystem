@@ -1,7 +1,7 @@
 package com.example.TeamManagementSystem.domain.entity;
 
 import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
-import com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;

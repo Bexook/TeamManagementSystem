@@ -1,9 +1,9 @@
 package com.example.TeamManagementSystem.changeRequestFeature.service.impl;
 
 import com.example.TeamManagementSystem.changeRequestFeature.SearchFunction;
-import com.example.TeamManagementSystem.changeRequestFeature.model.dto.ChangeRequestReviewDTO;
-import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestCommentEntity;
-import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.SearchCriteria;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestReviewDTO;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestCommentEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.SearchCriteria;
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestCommentRepository;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
 import org.springframework.beans.factory.annotation.Autowired;

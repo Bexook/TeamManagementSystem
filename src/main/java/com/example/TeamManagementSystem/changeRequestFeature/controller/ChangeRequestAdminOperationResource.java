@@ -1,8 +1,8 @@
 package com.example.TeamManagementSystem.changeRequestFeature.controller;
 
-import com.example.TeamManagementSystem.changeRequestFeature.model.dto.ChangeRequestReviewDTO;
-import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestCommentEntity;
-import com.example.TeamManagementSystem.changeRequestFeature.model.entity.ChangeRequestEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestReviewDTO;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestCommentEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestService;
 import com.example.TeamManagementSystem.domain.SearchStrategy;

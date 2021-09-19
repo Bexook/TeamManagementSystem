@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes;
+package com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes;
 
 public enum SearchCriteria {
 
