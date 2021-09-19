@@ -6,13 +6,13 @@ import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.Ope
 import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
-import com.example.TeamManagementSystem.mapper.UserMapper;
+import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
 import com.example.TeamManagementSystem.repository.UserRepository;
 import com.example.TeamManagementSystem.service.model.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -21,23 +21,26 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@Approver(userRole = UserRole.ADMIN, repository = UserRepository.class)
+@Approver(repository = UserRepository.class)
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private EntityManager entityManager;
-    private UserMapper userMapper;
+    @Autowired
+    private OrikaBeanMapper mapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDTO getUserById(@NonNull Long id) {
-        return userMapper.toUserDTO(userRepository.getById(id));
+        return mapper.map(userRepository.getById(id), UserDTO.class);
     }
 
     @Override
-    @Transactional(Transactional.TxType.MANDATORY)
+    @Transactional
+    @ChangeRequest(operationType = OperationType.CREATE)
     public boolean registerUser(@NonNull UserEntity userEntity) {
         userRepository.save(userEntity);
         return Objects.nonNull(userRepository.findByEmail(userEntity.getEmail()));
@@ -51,16 +54,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @ChangeRequest(operationType = OperationType.READ)
     public UserDTO findByEmail(String email) {
-        return userMapper.toUserDTO(userRepository.findByEmail(email));
+        return mapper.map(userRepository.findByEmail(email), UserDTO.class);
     }
 
     @Override
+    @ChangeRequest(operationType = OperationType.READ)
     public List<UserDTO> findAll(boolean isActive) {
         Session session = entityManager.unwrap(Session.class);
         session.enableFilter("activeFilter").setParameter("isActive", isActive);
         List<UserEntity> userEntityList = userRepository.findAll();
         session.disableFilter("activeFilter");
-        return userMapper.toUserDTOList(userEntityList);
+        return mapper.mapAsList(userEntityList, UserDTO.class);
+    }
+
+
+    @Override
+    public void update(UserDTO userDTO) {
+        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        userRepository.save(mapper.map(userDTO, UserEntity.class));
     }
 }

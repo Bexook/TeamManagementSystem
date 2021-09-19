@@ -12,21 +12,21 @@ import java.util.List;
 public interface TeamMemberService {
 
 
-    TeamMemberEntity findById(Long id);
+    TeamMemberDTO findById(Long id);
 
     TeamMemberDTO findDTOById(Long id);
 
     TeamMemberDTO findByUserId(Long id);
 
-    List<TeamMemberEntity> findByTeamRole(TeamMemberRole teamMemberRole);
+    List<TeamMemberDTO> findByTeamRole(TeamMemberRole teamMemberRole);
 
-    List<TeamMemberEntity> findAll();
+    List<TeamMemberDTO> findAll();
 
     void delete(Long id);
 
-    void update(TeamMemberEntity teamMemberEntity);
+    void update(TeamMemberDTO teamMemberDTO);
 
-    boolean addNew(TeamMemberEntity entity);
+    boolean addNew(TeamMemberDTO entity);
 
     void registerTeamMember(final UserRegisterDTO userRegisterDTO) throws IOException, BadHttpRequest;
 

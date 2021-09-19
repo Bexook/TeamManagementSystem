@@ -4,8 +4,11 @@ import com.example.TeamManagementSystem.changeRequestFeature.configs.ChangeReque
 import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
 import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.repository.TeamMemberRepository;
 import com.example.TeamManagementSystem.repository.UserRepository;
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +39,7 @@ public class ChangeRequestConfigs implements ChangeRequestRepositoriesConfigurat
         sources.addOperation(List.class, userRepositoryOperation);
         sources.addRepository(UserEntity.class, userRepository);
         sources.addRepository(TeamMemberEntity.class, teamMemberRepository);
+        sources.setApproverRole(UserRole.ADMIN.toString());
         return sources;
     }
 
@@ -48,5 +52,11 @@ public class ChangeRequestConfigs implements ChangeRequestRepositoriesConfigurat
         teamMemberRepoOperation = new HashMap<>();
         teamMemberRepoOperation.put("findAll(TeamMemberEntity)", teamMemberRepository::findAll);
 
+    }
+
+
+    @Bean
+    public MapperFactory getMapperFactory() {
+        return new DefaultMapperFactory.Builder().build();
     }
 }

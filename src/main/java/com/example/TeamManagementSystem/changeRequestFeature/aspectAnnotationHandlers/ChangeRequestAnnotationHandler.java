@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.changeRequestFeature.aspect;
+package com.example.TeamManagementSystem.changeRequestFeature.aspectAnnotationHandlers;
 
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
@@ -10,6 +10,7 @@ import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.Cha
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestRepository;
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetails;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.exception.RequestApproval;
 import com.example.TeamManagementSystem.changeRequestFeature.model.entityMarker.ChangeRequestEntityMarker;
 import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.ChangeRequestState;
@@ -46,16 +47,13 @@ public class ChangeRequestAnnotationHandler {
     public void annotationPointCut() {
     }
 
-
-    //TODO create approving of change request, updating and writing comments to one
-
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     @Before(value = "annotationPointCut()", argNames = "joinPoint")
     public Object executeAnnotation(JoinPoint joinPoint) throws Throwable {
         AppUserDetails userDetails = (AppUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (userDetails.getUserRole() == UserRole.ADMIN) {
-//            return joinPoint;
-//        }
+        if (userDetails.getUserRole() == UserRole.valueOf(sources.getApproverRole())) {
+            return joinPoint;
+        }
         Class<?> clazz = joinPoint.getTarget().getClass();
         ChangeRequest changeRequestAnnotation = clazz.getMethod(joinPoint.getSignature().getName(), Long.class).getAnnotation(ChangeRequest.class);
 
@@ -84,7 +82,7 @@ public class ChangeRequestAnnotationHandler {
         ChangeRequestEntity changeRequestEntity = new ChangeRequestEntity();
         changeRequestEntity.setChangeRequestState(ChangeRequestState.PENDING);
         changeRequestEntity.setCreatedBy(userDetails.getUsername());
-        changeRequestEntity.setUserRole(annotation.userRole());
+        changeRequestEntity.setUserRole(UserRole.valueOf(sources.getApproverRole()));
         changeRequestEntity.setOperationType(changeRequest.operationType());
         changeRequestEntity.setRelevant(true);
         changeRequestEntity.setObjectType(joinPoint.getTarget().getClass().getName());

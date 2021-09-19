@@ -18,6 +18,8 @@ public class Sources<ID extends Number> {
     private Map<Class<?>, Map<String, Supplier<?>>> repositoryOperations;
     private final EntityManager entityManager;
 
+    private String approverRole;
+
     public Sources(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -53,4 +55,12 @@ public class Sources<ID extends Number> {
         return (E) function.apply((SimpleJpaRepository<ChangeRequestEntityMarker, ? extends Number>) loadRepository(domainClass));
     }
 
+
+    public void setApproverRole(String approverRole) {
+        this.approverRole = approverRole;
+    }
+
+    public String getApproverRole() {
+        return approverRole;
+    }
 }

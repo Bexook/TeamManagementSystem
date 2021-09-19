@@ -18,7 +18,7 @@ public class AuthenticationController {
     private TeamMemberService teamMemberService;
 
     @GetMapping("/register")
-    public void registerPage(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse httpServletResponse) throws IOException, BadHttpRequest {
+    public void registerPage(@RequestBody UserRegisterDTO userRegisterDTO) throws IOException, BadHttpRequest {
         teamMemberService.registerTeamMember(userRegisterDTO);
     }
 

@@ -39,6 +39,33 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             <column name="role" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
+            <column name="time_log_id" type="BIGINT">
+                <constraints
+                        nullable="true"
+                        referencedTableName="time_log"
+                />
+            </column>
+        </createTable>
+
+        <createTable tableName="time_log">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_spend" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calendar_day_type" type="INT" defaultValue="3">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints
+                        nullable="false"
+                        referencedTableName="app_user"
+                />
+            </column>
         </createTable>
 
     </changeSet>

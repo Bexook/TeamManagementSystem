@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Data
@@ -47,6 +49,11 @@ public class UserEntity extends BaseEntity implements ChangeRequestEntityMarker 
 
     @Column(name = "is_email_verified")
     private boolean isEmailVerified;
+
+
+    @JoinColumn(name = "time_log_id")
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<TimeLogEntity> timeLog;
 
 
 }

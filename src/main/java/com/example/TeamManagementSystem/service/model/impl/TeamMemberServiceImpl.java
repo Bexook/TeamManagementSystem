@@ -1,7 +1,12 @@
 package com.example.TeamManagementSystem.service.model.impl;
 
+import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
+import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
+import com.example.TeamManagementSystem.changeRequestFeature.model.enumTypes.OperationType;
+import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
+import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
 import com.example.TeamManagementSystem.repository.TeamMemberRepository;
 import com.example.TeamManagementSystem.service.model.UserService;
 import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
@@ -25,6 +30,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@Approver(repository = TeamMemberRepository.class)
 public class TeamMemberServiceImpl implements TeamMemberService {
 
     @Autowired
@@ -35,10 +41,13 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     private EntityManager entityManager;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private OrikaBeanMapper mapper;
+
 
     @Override
-    public TeamMemberEntity findById(@NonNull Long id) {
-        return teamMemberRepository.findById(id).orElseThrow();
+    public TeamMemberDTO findById(@NonNull Long id) {
+        return mapper.map(teamMemberRepository.findById(id).orElseThrow(), TeamMemberDTO.class);
     }
 
     @Override
@@ -52,35 +61,42 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     }
 
     @Override
-    public List<TeamMemberEntity> findByTeamRole(@NonNull TeamMemberRole teamMemberRole) {
+    public List<TeamMemberDTO> findByTeamRole(@NonNull TeamMemberRole teamMemberRole) {
         Session session = entityManager.unwrap(Session.class);
         session.enableFilter("filterByRole").setParameter("role", teamMemberRole.toString());
         List<TeamMemberEntity> teamMemberEntities = teamMemberRepository.findAll();
         session.disableFilter("filterByRole");
-        return teamMemberEntities;
+        return mapper.mapAsList(teamMemberEntities, TeamMemberDTO.class);
     }
 
-    @Transactional
+
     @Override
+    @Transactional
+    @ChangeRequest(operationType = OperationType.DELETE)
     public void delete(@NonNull Long id) {
         teamMemberRepository.deleteById(id);
     }
 
-    @Transactional
-    @Override
-    public void update(@NonNull TeamMemberEntity teamMemberEntity) {
-        teamMemberRepository.save(teamMemberEntity);
-    }
-
-    @Transactional
-    @Override
-    public boolean addNew(@NonNull TeamMemberEntity entity) {
-        teamMemberRepository.save(entity);
-        return Objects.nonNull(teamMemberRepository.findByDTOUserId(userService.findByEmail(entity.getUserEntity().getEmail()).getId()));
-    }
 
     @Override
-    public void registerTeamMember(final UserRegisterDTO userRegisterDTO) throws IOException, BadHttpRequest {
+    @Transactional
+    @ChangeRequest(operationType = OperationType.UPDATE)
+    public void update(@NonNull TeamMemberDTO teamMemberDTO) {
+        teamMemberRepository.save(mapper.map(teamMemberDTO, TeamMemberEntity.class));
+    }
+
+
+    @Override
+    @ChangeRequest(operationType = OperationType.UPDATE)
+    public boolean addNew(@NonNull TeamMemberDTO teamMemberDTO) {
+        teamMemberRepository.save(mapper.map(teamMemberDTO, TeamMemberEntity.class));
+        UserDTO userDTO = userService.getUserById(teamMemberDTO.getUserId());
+        return Objects.nonNull(teamMemberRepository.findByDTOUserId(userDTO.getId()));
+    }
+
+    @Override
+    @ChangeRequest(operationType = OperationType.CREATE)
+    public void registerTeamMember(final UserRegisterDTO userRegisterDTO) throws BadHttpRequest {
         if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getRepeatPassword())) {
             throw new BadHttpRequest();
         }
@@ -94,18 +110,18 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         userEntity.setUserRole(UserRole.USER);
         userEntity.setCreatedAt(new Date());
 
-        TeamMemberEntity teamMemberEntity = new TeamMemberEntity();
-        teamMemberEntity.setUserEntity(userEntity);
-        teamMemberEntity.setName(userRegisterDTO.getUsername());
-        teamMemberEntity.setMemberRole(userRegisterDTO.getTeamMemberRole());
-        if (!this.addNew(teamMemberEntity)) {
+        TeamMemberDTO teamMemberDTO = new TeamMemberDTO();
+        teamMemberDTO.setName(userRegisterDTO.getUsername());
+        teamMemberDTO.setMemberRole(userRegisterDTO.getTeamMemberRole());
+        if (!this.addNew(teamMemberDTO)) {
             throw new BadHttpRequest();
         }
+        teamMemberRepository.save(mapper.map(teamMemberDTO, TeamMemberEntity.class));
     }
 
 
     @Override
-    public List<TeamMemberEntity> findAll() {
-        return teamMemberRepository.findAll();
+    public List<TeamMemberDTO> findAll() {
+        return mapper.mapAsList(teamMemberRepository.findAll(), TeamMemberDTO.class);
     }
 }

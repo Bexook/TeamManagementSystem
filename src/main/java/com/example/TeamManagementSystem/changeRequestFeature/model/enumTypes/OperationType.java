@@ -5,7 +5,8 @@ import java.util.Arrays;
 public enum OperationType {
     CREATE(1),
     UPDATE(2),
-    DELETE(3);
+    DELETE(3),
+    READ(4);
 
     private int code;
 
@@ -17,7 +18,7 @@ public enum OperationType {
         return code;
     }
 
-    public static OperationType getByCode(int code){
-        return Arrays.stream(values()).filter(element->element.getCode() == code).findFirst().orElseThrow();
+    public static OperationType getByCode(int code) {
+        return Arrays.stream(values()).filter(element -> element.getCode() == code).findFirst().orElseThrow();
     }
 }

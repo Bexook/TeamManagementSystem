@@ -2,6 +2,7 @@ package com.example.TeamManagementSystem.repository;
 
 import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
 import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface TeamMemberRepository extends JpaRepository<TeamMemberEntity, Long> {
 
 
-    TeamMemberEntity getById(Long id);
+    @NonNull TeamMemberEntity getById(Long id);
 
     @Query(nativeQuery = true, name = "findDTOById")
     TeamMemberDTO findByDTOId(@Param("id") Long id);

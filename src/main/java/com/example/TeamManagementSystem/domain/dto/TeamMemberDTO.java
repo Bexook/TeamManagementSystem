@@ -2,19 +2,22 @@ package com.example.TeamManagementSystem.domain.dto;
 
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.domain.enumTypes.TeamMemberRole;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class TeamMemberDTO {
 
     private Long id;
     private String name;
     private TeamMemberRole memberRole;
-    private UserEntity userEntity;
+    private Long userId;
+
+    public TeamMemberDTO(Long id, String name, Integer memberRole, Long userId) {
+        this.id = id;
+        this.name = name;
+        this.memberRole = TeamMemberRole.getByCode(memberRole);
+        this.userId = userId;
+    }
 }

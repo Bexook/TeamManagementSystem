@@ -19,4 +19,6 @@ public interface UserService {
     UserDTO findByEmail(String email);
 
     List<UserDTO> findAll(boolean isActive);
+
+    void update(UserDTO userDTO);
 }
