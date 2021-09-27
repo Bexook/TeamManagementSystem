@@ -5,9 +5,7 @@ import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.*;
-import org.springframework.core.annotation.Order;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;

@@ -1,17 +1,20 @@
 package com.example.TeamManagementSystem.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
+@Transactional
 @MappedSuperclass
 public class BaseEntity {
 
     @Column(name = "created_at")
-    @Temporal(value = TemporalType.DATE)
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @Column(name = "modified_at")
     private Date modifiedAt;
 

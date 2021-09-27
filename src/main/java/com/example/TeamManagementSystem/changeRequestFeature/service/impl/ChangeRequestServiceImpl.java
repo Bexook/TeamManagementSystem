@@ -5,6 +5,7 @@ import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
 import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestReviewDTO;
 import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
 import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
+import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.ChangeRequestState;
 import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.SearchCriteria;
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestRepository;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
@@ -20,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,15 +35,17 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
     @Autowired
     private ChangeRequestCommentService changeRequestCommentService;
     @Autowired
-    private Sources<Long> sources;
+    private ObjectMapper serializer;
     @Autowired
-    private ObjectMapper objectMapper;
+    private OrikaBeanMapper mapper;
+    @Autowired
+    private Sources<Long> sources;
 
     private Map<SearchCriteria, SearchFunction<ChangeRequestRepository, ChangeRequestEntity>> searchFunctionsMap;
 
     {
         searchFunctionsMap = new HashMap<>();
-        searchFunctionsMap.put(SearchCriteria.BY_CREATION_DATE, (object, repo, pageable) -> repo.findByCreatedAt((Date) object, pageable));
+        searchFunctionsMap.put(SearchCriteria.BY_CREATION_DATE, (object, repo, pageable) -> repo.findByCreatedAt((LocalDateTime) object, pageable));
         searchFunctionsMap.put(SearchCriteria.BY_USERNAME, (object, repo, pageable) -> repo.findByCreatedBy(String.valueOf(object), pageable));
         searchFunctionsMap.put(SearchCriteria.BY_OBJECT_TYPE, (object, repo, pageable) -> repo.findByDomainClass(String.valueOf(object), pageable));
         searchFunctionsMap.put(SearchCriteria.BY_LAST_MODIFICATION_DATE, (object, repo, pageable) -> repo.findByModifiedAt((Date) object, pageable));
@@ -54,10 +58,7 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
     @Transactional
     @PreAuthorize("@userAccessValidation.hasAuthority('APPROVE')")
     public ChangeRequestReviewDTO update(ChangeRequestReviewDTO changeRequestReviewDTO) throws ClassNotFoundException {
-        ChangeRequestEntity cr = changeRequestRepository.getById(changeRequestReviewDTO.getChangeRequestEntity().getId());
-        proceedChangeRequest(changeRequestReviewDTO, cr);
-        changeRequestRepository.save(cr);
-        changeRequestReviewDTO.setChangeRequestEntity(cr);
+        proceedChangeRequest(changeRequestReviewDTO);
         return changeRequestReviewDTO;
     }
 
@@ -77,18 +78,18 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
     }
 
 
-    private void proceedChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) throws ClassNotFoundException, JsonProcessingException {
+    private void proceedChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO) throws ClassNotFoundException, JsonProcessingException {
         switch (changeRequestReviewDTO.getChangeRequestEntity().getChangeRequestState()) {
             case APPROVED: {
-                approveChangeRequest(changeRequestReviewDTO, cr);
+                approveChangeRequest(changeRequestReviewDTO.getChangeRequestEntity().getChangeRequestState(), changeRequestReviewDTO.getChangeRequestEntity());
                 break;
             }
             case DECLINED: {
-                declineChangeRequest(changeRequestReviewDTO, cr);
+                declineChangeRequest(changeRequestReviewDTO, changeRequestReviewDTO.getChangeRequestEntity());
                 break;
             }
             case REQUESTED_CHANGES: {
-                requestChanges(changeRequestReviewDTO, cr);
+                requestChanges(changeRequestReviewDTO, changeRequestReviewDTO.getChangeRequestEntity());
                 break;
             }
             case PENDING: {
@@ -109,12 +110,33 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
     }
 
 
-    private void approveChangeRequest(ChangeRequestReviewDTO changeRequestReviewDTO, ChangeRequestEntity cr) throws ClassNotFoundException, JsonProcessingException {
-        Class<?> domainClass = Class.forName(cr.getDomainClass());
-        ChangeRequestEntityMarker entity = (ChangeRequestEntityMarker) objectMapper.readValue(cr.getNewObjectState(), domainClass);
-        sources.loadRepository(domainClass).save(entity);
-        cr.setChangeRequestState(changeRequestReviewDTO.getChangeRequestEntity().getChangeRequestState());
+    private <T> void approveChangeRequest(ChangeRequestState changeRequestState, ChangeRequestEntity cr) throws ClassNotFoundException, JsonProcessingException {
+        cr.setChangeRequestState(changeRequestState);
+        approveByOperationType(cr);
+        changeRequestRepository.save(cr);
     }
 
+
+    private <T> void approveByOperationType(ChangeRequestEntity changeRequestEntity) throws ClassNotFoundException, JsonProcessingException {
+
+        switch (changeRequestEntity.getOperationType()) {
+            case READ: {
+                break;
+            }
+            case CREATE:
+            case UPDATE: {
+                Class<T> domainClass = (Class<T>) Class.forName(changeRequestEntity.getDomainClass());
+                ChangeRequestEntityMarker entityMarker = (ChangeRequestEntityMarker) mapper.map(serializer.readValue(changeRequestEntity.getNewObjectState(), domainClass), domainClass);
+                sources.loadRepository(domainClass).save(entityMarker);
+                break;
+            }
+            case DELETE: {
+                Class<T> domainClass = (Class<T>) Class.forName(changeRequestEntity.getDomainClass());
+                ChangeRequestEntityMarker entityMarker = (ChangeRequestEntityMarker) mapper.map(serializer.readValue(changeRequestEntity.getCurrentObjectState(), domainClass), domainClass);
+                sources.loadRepository(domainClass).deleteById(entityMarker.getId());
+                break;
+            }
+        }
+    }
 }
 

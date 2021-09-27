@@ -3,3 +3,10 @@ Web call, streaming
 Messaging service
 Microservice Arh
 
+
+
+TASKS:
+- Time Logs: implement service class, calculate time based on +0 time zone
+- Feed page: implement feed logic, CRUD and, create migration for it
+- Rewrite security: our authorization should rely on AccessType with Authorities('read, update,...');
+- Notification service: implement notification service based on Flux WebSocket;

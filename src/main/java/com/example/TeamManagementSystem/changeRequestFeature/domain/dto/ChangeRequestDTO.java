@@ -7,7 +7,10 @@ import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import javax.persistence.*;
 import java.util.Set;
 
 @Data
@@ -15,18 +18,15 @@ import java.util.Set;
 @AllArgsConstructor
 public class ChangeRequestDTO {
     private Long id;
-
     private String createdBy;
-
+    private String modifiedBy;
     private UserRole userRole;
-
     private ChangeRequestState changeRequestState;
-
     private OperationType operationType;
-
     private String currentObjectState;
-
     private String newObjectState;
-
+    private String domainClass;
     private Set<ChangeRequestCommentEntity> changeRequestCommentEntities;
+    private boolean relevant = true;
+    private String objectRepo;
 }

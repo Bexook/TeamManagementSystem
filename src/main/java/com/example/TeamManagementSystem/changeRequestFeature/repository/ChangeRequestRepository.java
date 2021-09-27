@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -14,7 +15,7 @@ public interface ChangeRequestRepository extends JpaRepository<ChangeRequestEnti
 
     Page<ChangeRequestEntity> findByCreatedBy(String createdBy, Pageable pageable);
 
-    Page<ChangeRequestEntity> findByCreatedAt(Date createdAt, Pageable pageable);
+    Page<ChangeRequestEntity> findByCreatedAt(LocalDateTime createdAt, Pageable pageable);
 
     Page<ChangeRequestEntity> findByDomainClass(String domainClass, Pageable pageable);
 

@@ -3,6 +3,7 @@ package com.example.TeamManagementSystem.changeRequestFeature.controller;
 import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestReviewDTO;
 import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestCommentEntity;
 import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
+import com.example.TeamManagementSystem.changeRequestFeature.events.publishers.ChangeRequestEventPublisher;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestService;
 import com.example.TeamManagementSystem.domain.SearchStrategy;
@@ -25,11 +26,12 @@ public class ChangeRequestAdminOperationResource {
     private ChangeRequestService changeRequestService;
     @Autowired
     private ChangeRequestCommentService changeRequestCommentService;
+
     private static final String DEFAULT_PAGE_SIZE = "10";
     private static final String DEFAULT_PAGE_NUMBER = "0";
 
 
-    @PostMapping("/update-state")
+    @PostMapping("/update")
     @PreAuthorize("@userAccessValidation.hasAuthority('APPROVE')")
     public ResponseEntity<ChangeRequestReviewDTO> review(@RequestBody ChangeRequestReviewDTO changeRequestReviewDTO) throws ClassNotFoundException {
         return ResponseEntity.ok(changeRequestService.update(changeRequestReviewDTO));

@@ -107,7 +107,6 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         userEntity.setEmail(userRegisterDTO.getEmail());
         userEntity.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
         userEntity.setUserRole(UserRole.USER);
-        userEntity.setCreatedAt(new Date());
 
         TeamMemberDTO teamMemberDTO = new TeamMemberDTO();
         teamMemberDTO.setName(userRegisterDTO.getUsername());

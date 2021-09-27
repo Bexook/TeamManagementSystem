@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Component
@@ -20,7 +23,7 @@ public class ChangeEntityEventListener {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         changeRequestEntity.setCreatedBy(authentication.getName());
         changeRequestEntity.setModifiedAt(null);
-        changeRequestEntity.setCreatedAt(new Date());
+        changeRequestEntity.setCreatedAt(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.controller.mvc;
+package com.example.TeamManagementSystem.controller.rest;
 
 import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
