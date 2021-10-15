@@ -121,6 +121,7 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
 
         switch (changeRequestEntity.getOperationType()) {
             case READ: {
+                String objectToRead = changeRequestEntity.getCurrentObjectState();
                 break;
             }
             case CREATE:

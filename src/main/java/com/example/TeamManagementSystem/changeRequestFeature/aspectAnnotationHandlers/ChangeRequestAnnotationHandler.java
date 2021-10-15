@@ -107,7 +107,11 @@ public class ChangeRequestAnnotationHandler {
                 break;
             }
             case READ: {
-                readOperation(changeRequestEntity);
+                if(Objects.isNull(joinPoint.getArgs())){
+                    List<?> currentObjectState =  sources.loadRepository(changeRequestEntity.getDomainClass().getClass()).findAll();
+                    changeRequestEntity.setCurrentObjectState(objectMapper.writeValueAsString(currentObjectState));
+                    readOperation(changeRequestEntity);
+                }
             }
             default: {
                 throw new IllegalArgumentException("Change request operation does not exist");
