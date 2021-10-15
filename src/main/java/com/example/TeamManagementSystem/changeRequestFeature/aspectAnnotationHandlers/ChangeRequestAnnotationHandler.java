@@ -25,6 +25,9 @@ import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static java.lang.Class.forName;
 
 @Aspect
 @Component
@@ -41,6 +44,7 @@ public class ChangeRequestAnnotationHandler {
     public void annotationPointCut() {
     }
 
+
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     @Before(value = "annotationPointCut()", argNames = "joinPoint")
     public Object executeAnnotation(JoinPoint joinPoint) throws Throwable {
@@ -49,7 +53,11 @@ public class ChangeRequestAnnotationHandler {
             return joinPoint;
         }
         Class<?> clazz = joinPoint.getTarget().getClass();
-        ChangeRequest changeRequestAnnotation = clazz.getMethod(joinPoint.getSignature().getName(), Long.class).getAnnotation(ChangeRequest.class);
+        Class<?>[] args = new Class<?>[joinPoint.getArgs().length];
+        for (int i = 0; i < joinPoint.getArgs().length; i++) {
+            args[i] = joinPoint.getArgs()[i].getClass();
+        }
+        ChangeRequest changeRequestAnnotation = clazz.getDeclaredMethod(joinPoint.getSignature().getName(), args).getAnnotation(ChangeRequest.class);
 
         Approver annotation = clazz.getAnnotation(Approver.class);
         if (Objects.isNull(annotation)) {

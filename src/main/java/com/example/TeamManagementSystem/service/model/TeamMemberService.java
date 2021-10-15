@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface TeamMemberService {
 
-
     TeamMemberDTO findById(Long id);
 
     TeamMemberDTO findDTOById(Long id);
@@ -26,8 +25,8 @@ public interface TeamMemberService {
 
     void update(TeamMemberDTO teamMemberDTO);
 
-    boolean addNew(TeamMemberDTO entity);
+    boolean addNew(TeamMemberEntity entity);
 
-    void registerTeamMember(final UserRegisterDTO userRegisterDTO) throws IOException, BadHttpRequest;
+    void registerTeamMember(final TeamMemberEntity teamMember) throws IOException, BadHttpRequest;
 
 }

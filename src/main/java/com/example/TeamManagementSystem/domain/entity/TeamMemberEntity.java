@@ -51,7 +51,7 @@ import javax.persistence.*;
 public class TeamMemberEntity extends BaseEntity implements ChangeRequestEntityMarker {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "username")

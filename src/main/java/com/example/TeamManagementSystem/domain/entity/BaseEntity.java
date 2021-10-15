@@ -16,6 +16,18 @@ public class BaseEntity {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "modified_at")
-    private Date modifiedAt;
+    private LocalDateTime modifiedAt;
+
+
+    @PrePersist
+    public void initPersist() {
+        createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void initUpdate() {
+        modifiedAt = LocalDateTime.now();
+    }
+
 
 }

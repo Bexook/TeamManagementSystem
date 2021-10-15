@@ -40,9 +40,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     @ChangeRequest(operationType = OperationType.CREATE)
-    public boolean registerUser(@NonNull UserEntity userEntity) {
+    public UserEntity registerUser(@NonNull UserEntity userEntity) {
         userRepository.save(userEntity);
-        return Objects.nonNull(userRepository.findByEmail(userEntity.getEmail()));
+        return userRepository.findByEmail(userEntity.getEmail());
     }
 
     @Override

@@ -21,7 +21,7 @@ import java.util.List;
 @Filter(name = "activeFilter", condition = "is_active=:isActive")
 public class UserEntity extends BaseEntity implements ChangeRequestEntityMarker {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "email")

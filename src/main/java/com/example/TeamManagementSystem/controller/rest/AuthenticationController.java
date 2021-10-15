@@ -1,6 +1,7 @@
 package com.example.TeamManagementSystem.controller.rest;
 
 import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
+import com.example.TeamManagementSystem.service.model.AccountDetailsService;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
 import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,11 @@ import java.io.IOException;
 public class AuthenticationController {
 
     @Autowired
-    private TeamMemberService teamMemberService;
+    private AccountDetailsService accountDetailsService;
 
     @GetMapping("/register")
     public void registerPage(@RequestBody UserRegisterDTO userRegisterDTO) throws IOException, BadHttpRequest {
-        teamMemberService.registerTeamMember(userRegisterDTO);
+        accountDetailsService.createNewAccount(userRegisterDTO);
     }
 
 }

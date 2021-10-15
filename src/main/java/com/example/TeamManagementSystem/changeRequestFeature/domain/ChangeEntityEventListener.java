@@ -32,7 +32,7 @@ public class ChangeEntityEventListener {
     void preUpdateDataInjection(ChangeRequestEntity changeRequestEntity) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         changeRequestEntity.setModifiedBy(authentication.getName());
-        changeRequestEntity.setModifiedAt(new Date());
+        changeRequestEntity.setModifiedAt(LocalDateTime.now());
     }
 
 

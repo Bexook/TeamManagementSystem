@@ -1,15 +1,22 @@
 package com.example.TeamManagementSystem.service.model.impl;
 
 import com.example.TeamManagementSystem.domain.dto.UserDTO;
+import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
+import com.example.TeamManagementSystem.domain.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.service.model.AccountDetailsService;
 import com.example.TeamManagementSystem.service.model.UserService;
 import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
 import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
 import com.example.TeamManagementSystem.util.AuthorizationUtils;
+import javassist.tools.web.BadHttpRequest;
+import liquibase.pro.packaged.A;
 import lombok.SneakyThrows;
 import org.apache.http.HttpException;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.SystemException;
@@ -21,6 +28,8 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
     private TeamMemberService teamMemberService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -46,5 +55,27 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
             return userService.findByEmail(userDTO.getEmail());
         }
         throw new SystemException(403);
+    }
+
+
+    @SneakyThrows
+    @Override
+    public void createNewAccount(UserRegisterDTO userRegisterDTO) {
+        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getRepeatPassword())) {
+            throw new BadHttpRequest();
+        }
+
+        if (Strings.isBlank(userRegisterDTO.getEmail())) {
+            throw new BadHttpRequest();
+        }
+        UserEntity userEntity = new UserEntity();
+        userEntity.setEmail(userRegisterDTO.getEmail());
+        userEntity.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+        userEntity.setUserRole(UserRole.USER);
+        TeamMemberEntity teamMember = new TeamMemberEntity();
+        teamMember.setName(userRegisterDTO.getUsername());
+        teamMember.setMemberRole(userRegisterDTO.getTeamMemberRole());
+        teamMember.setUserEntity(userEntity);
+        teamMemberService.registerTeamMember(teamMember);
     }
 }
