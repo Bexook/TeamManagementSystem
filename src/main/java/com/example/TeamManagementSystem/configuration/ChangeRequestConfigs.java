@@ -45,7 +45,7 @@ public class ChangeRequestConfigs implements ChangeRequestRepositoriesConfigurat
 
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         userRepositoryOperation = new HashMap<>();
         userRepositoryOperation.put("findAll(UserEntity)", userRepository::findAll);
 

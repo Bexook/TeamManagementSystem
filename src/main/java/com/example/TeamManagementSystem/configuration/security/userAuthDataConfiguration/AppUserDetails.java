@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class AppUserDetails implements UserDetails {
 
@@ -55,4 +56,13 @@ public class AppUserDetails implements UserDetails {
     public UserRole getUserRole() {
         return userEntity.getUserRole();
     }
+
+
+    public boolean nonNullProperties() {
+        return Objects.nonNull(this.userEntity) &&
+                Objects.nonNull(this.userEntity.getPassword()) &&
+                Objects.nonNull(this.userEntity.getEmail()) &&
+                Objects.nonNull(this.userEntity.getUserRole());
+    }
+
 }
