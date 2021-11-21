@@ -72,7 +72,7 @@ public class JWTServiceImpl implements JWTService {
     @Override
     public String login(UserCredentials creds) throws AuthenticationException {
         AppUserDetails userDetails = (AppUserDetails) appUserDetailsService.loadUserByUsername(creds.getLogin());
-        if (Objects.nonNull(userDetails) && passwordEncoder.matches(creds.getPassword(), userDetails.getPassword())) {
+        if (Objects.nonNull(userDetails) && userDetails.nonNullProperties() && passwordEncoder.matches(creds.getPassword(), userDetails.getPassword())) {
             return generateToken(userDetails);
         }
         throw new AuthenticationException("Unknown user");

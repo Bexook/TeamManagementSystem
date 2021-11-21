@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(code = HttpStatus.ACCEPTED, reason = "Change Request has been created!")
 public class RequestApproval extends HttpException {
 
-    public RequestApproval() {
-    }
+    private String message;
+    private ErrorStatusCode errorStatusCode;
+
+    public RequestApproval(){}
+
+    public RequestApproval(String message, ErrorStatusCode errorStatusCode) {}
 
     public RequestApproval(String message) {
         super(message);
@@ -17,6 +21,5 @@ public class RequestApproval extends HttpException {
     public RequestApproval(String message, Throwable cause) {
         super(message, cause);
     }
-
 
 }
