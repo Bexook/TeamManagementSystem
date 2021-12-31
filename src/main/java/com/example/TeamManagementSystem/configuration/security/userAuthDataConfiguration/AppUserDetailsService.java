@@ -1,7 +1,7 @@
 package com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration;
 
-import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.repository.UserRepository;
+import com.tms.dao.tmsdao.domain.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

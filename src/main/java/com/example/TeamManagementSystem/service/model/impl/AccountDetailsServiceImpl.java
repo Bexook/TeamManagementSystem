@@ -1,15 +1,15 @@
 package com.example.TeamManagementSystem.service.model.impl;
 
-import com.example.TeamManagementSystem.domain.dto.UserDTO;
-import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
-import com.example.TeamManagementSystem.domain.entity.UserEntity;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.service.model.AccountDetailsService;
 import com.example.TeamManagementSystem.service.model.UserService;
-import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
-import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
 import com.example.TeamManagementSystem.util.AuthorizationUtils;
+import com.tms.dao.tmsdao.domain.TeamMemberEntity;
+import com.tms.dao.tmsdao.domain.UserEntity;
+import com.tms.dao.tmsdao.domain.dto.TeamMemberDTO;
+import com.tms.dao.tmsdao.domain.dto.UserDTO;
+import com.tms.dao.tmsdao.domain.dto.UserRegisterDTO;
+import com.tms.dao.tmsdao.domain.enumTypes.auth.UserRole;
 import javassist.tools.web.BadHttpRequest;
 import liquibase.pro.packaged.A;
 import lombok.SneakyThrows;

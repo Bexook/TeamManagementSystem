@@ -1,7 +1,8 @@
 package com.example.TeamManagementSystem.service.model;
 
-import com.example.TeamManagementSystem.domain.dto.TimeLogDTO;
-import com.example.TeamManagementSystem.domain.dto.UserDTO;
+
+import com.tms.dao.tmsdao.domain.dto.TimeLogDTO;
+import com.tms.dao.tmsdao.domain.dto.UserDTO;
 
 import java.time.LocalDate;
 import java.util.List;

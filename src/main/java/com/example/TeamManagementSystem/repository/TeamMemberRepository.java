@@ -1,7 +1,8 @@
 package com.example.TeamManagementSystem.repository;
 
-import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
-import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
+
+import com.tms.dao.tmsdao.domain.TeamMemberEntity;
+import com.tms.dao.tmsdao.domain.dto.TeamMemberDTO;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

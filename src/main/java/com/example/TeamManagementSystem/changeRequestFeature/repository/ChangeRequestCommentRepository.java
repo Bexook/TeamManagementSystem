@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.changeRequestFeature.repository;
 
-import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestCommentEntity;
+import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestCommentEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

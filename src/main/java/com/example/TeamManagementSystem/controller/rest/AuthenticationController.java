@@ -1,8 +1,8 @@
 package com.example.TeamManagementSystem.controller.rest;
 
-import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
 import com.example.TeamManagementSystem.service.model.AccountDetailsService;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
+import com.tms.dao.tmsdao.domain.dto.UserRegisterDTO;
 import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

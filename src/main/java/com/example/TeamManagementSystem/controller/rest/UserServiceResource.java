@@ -1,7 +1,7 @@
 package com.example.TeamManagementSystem.controller.rest;
 
-import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.service.model.UserService;
+import com.tms.dao.tmsdao.domain.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

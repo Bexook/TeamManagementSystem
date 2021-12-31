@@ -2,11 +2,12 @@ package com.example.TeamManagementSystem.configuration;
 
 import com.example.TeamManagementSystem.changeRequestFeature.configs.ChangeRequestRepositoriesConfiguration;
 import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
-import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
-import com.example.TeamManagementSystem.domain.entity.UserEntity;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
+
 import com.example.TeamManagementSystem.repository.TeamMemberRepository;
 import com.example.TeamManagementSystem.repository.UserRepository;
+import com.tms.dao.tmsdao.domain.TeamMemberEntity;
+import com.tms.dao.tmsdao.domain.UserEntity;
+import com.tms.dao.tmsdao.domain.enumTypes.auth.UserRole;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,10 +4,11 @@ import com.example.TeamManagementSystem.configuration.security.service.JWTServic
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetails;
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetailsService;
 import com.example.TeamManagementSystem.domain.UserCredentials;
-import com.example.TeamManagementSystem.domain.entity.JWTTokenEntity;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.Authority;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
+
 import com.example.TeamManagementSystem.repository.JWTTokenRepository;
+import com.tms.dao.tmsdao.domain.JWTTokenEntity;
+import com.tms.dao.tmsdao.domain.enumTypes.auth.Authority;
+import com.tms.dao.tmsdao.domain.enumTypes.auth.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

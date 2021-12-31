@@ -1,6 +1,8 @@
 package com.example.TeamManagementSystem.changeRequestFeature.annotation;
 
-import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
+
+
+import com.tms.dao.tmsdao.changeRequestDomain.entityMarker.ChangeRequestEntityMarker;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

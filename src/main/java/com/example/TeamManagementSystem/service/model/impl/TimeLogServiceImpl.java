@@ -1,9 +1,10 @@
 package com.example.TeamManagementSystem.service.model.impl;
 
-import com.example.TeamManagementSystem.domain.dto.TimeLogDTO;
-import com.example.TeamManagementSystem.domain.dto.UserDTO;
+
 import com.example.TeamManagementSystem.repository.TimeLogRepository;
 import com.example.TeamManagementSystem.service.model.TimeLogService;
+import com.tms.dao.tmsdao.domain.dto.TimeLogDTO;
+import com.tms.dao.tmsdao.domain.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

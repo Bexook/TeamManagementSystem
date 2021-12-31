@@ -1,8 +1,8 @@
 package com.example.TeamManagementSystem.changeRequestFeature.service;
 
-import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestReviewDTO;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestCommentEntity;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.SearchCriteria;
+import com.tms.dao.tmsdao.changeRequestDomain.dto.ChangeRequestReviewDTO;
+import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestCommentEntity;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.SearchCriteria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -1,11 +1,11 @@
 package com.example.TeamManagementSystem.changeRequestFeature.service.impl;
 
 import com.example.TeamManagementSystem.changeRequestFeature.SearchFunction;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestReviewDTO;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestCommentEntity;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.SearchCriteria;
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestCommentRepository;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
+import com.tms.dao.tmsdao.changeRequestDomain.dto.ChangeRequestReviewDTO;
+import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestCommentEntity;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

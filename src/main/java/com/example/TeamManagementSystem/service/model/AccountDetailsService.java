@@ -1,11 +1,11 @@
 package com.example.TeamManagementSystem.service.model;
 
-import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
-import com.example.TeamManagementSystem.domain.dto.UserDTO;
-import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
-import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
+import com.tms.dao.tmsdao.domain.dto.TeamMemberDTO;
+import com.tms.dao.tmsdao.domain.dto.UserDTO;
+import com.tms.dao.tmsdao.domain.dto.UserRegisterDTO;
 
 import java.util.List;
+
 
 public interface AccountDetailsService {
 

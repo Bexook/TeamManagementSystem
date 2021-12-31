@@ -1,7 +1,8 @@
 package com.example.TeamManagementSystem.changeRequestFeature.events.dto;
 
-import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestDTO;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.OperationType;
+
+import com.tms.dao.tmsdao.changeRequestDomain.dto.ChangeRequestDTO;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.OperationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

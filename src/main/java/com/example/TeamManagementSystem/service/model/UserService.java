@@ -1,7 +1,7 @@
 package com.example.TeamManagementSystem.service.model;
 
-import com.example.TeamManagementSystem.domain.dto.UserDTO;
-import com.example.TeamManagementSystem.domain.entity.UserEntity;
+import com.tms.dao.tmsdao.domain.UserEntity;
+import com.tms.dao.tmsdao.domain.dto.UserDTO;
 import lombok.NonNull;
 
 import java.util.List;

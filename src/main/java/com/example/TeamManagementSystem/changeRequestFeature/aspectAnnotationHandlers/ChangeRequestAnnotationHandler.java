@@ -3,16 +3,17 @@ package com.example.TeamManagementSystem.changeRequestFeature.aspectAnnotationHa
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
 import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.ChangeRequestState;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.OperationType;
+
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestRepository;
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetails;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.exception.RequestApproval;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestEntity;
+import com.tms.dao.tmsdao.changeRequestDomain.entityMarker.ChangeRequestEntityMarker;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.ChangeRequestState;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.OperationType;
+import com.tms.dao.tmsdao.domain.enumTypes.auth.UserRole;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

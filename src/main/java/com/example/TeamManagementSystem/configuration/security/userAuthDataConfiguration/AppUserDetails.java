@@ -1,7 +1,7 @@
 package com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration;
 
-import com.example.TeamManagementSystem.domain.entity.UserEntity;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
+import com.tms.dao.tmsdao.domain.UserEntity;
+import com.tms.dao.tmsdao.domain.enumTypes.auth.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -65,4 +65,8 @@ public class AppUserDetails implements UserDetails {
                 Objects.nonNull(this.userEntity.getUserRole());
     }
 
+
+    public Long getUserId() {
+        return userEntity.getId();
+    }
 }

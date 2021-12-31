@@ -1,6 +1,7 @@
 package com.example.TeamManagementSystem.repository;
 
-import com.example.TeamManagementSystem.domain.entity.JWTTokenEntity;
+
+import com.tms.dao.tmsdao.domain.JWTTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

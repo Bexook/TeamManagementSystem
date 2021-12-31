@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.domain;
 
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.SearchCriteria;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.SearchCriteria;
 import lombok.Data;
 
 @Data

@@ -10,4 +10,10 @@ public class AuthorizationUtils {
         return userDetails.getUsername();
     }
 
+    public static Long getCurrentAuthenticatedUserId() {
+        AppUserDetails userDetails = (AppUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getUserId();
+    }
+
+
 }

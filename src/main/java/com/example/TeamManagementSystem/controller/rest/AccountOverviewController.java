@@ -1,9 +1,9 @@
 package com.example.TeamManagementSystem.controller.rest;
 
-import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
-import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.service.model.AccountDetailsService;
 import com.example.TeamManagementSystem.util.AuthorizationUtils;
+import com.tms.dao.tmsdao.domain.dto.TeamMemberDTO;
+import com.tms.dao.tmsdao.domain.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

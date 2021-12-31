@@ -9,4 +9,5 @@
     <include file="/db/changelog/changes/V_04_insert_values_team_member_table.xml"/>
     <include file="/db/changelog/changes/V_05_create_jwt_token_table.xml"/>
     <include file="/db/changelog/changes/V_06_create_change_request_table.xml"/>
+    <include file="/db/changelog/changes/V_07_create_user_message_table.xml"/>
 </databaseChangeLog>

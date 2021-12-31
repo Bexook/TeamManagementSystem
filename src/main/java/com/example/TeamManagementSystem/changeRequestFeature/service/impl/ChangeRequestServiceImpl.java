@@ -2,17 +2,18 @@ package com.example.TeamManagementSystem.changeRequestFeature.service.impl;
 
 import com.example.TeamManagementSystem.changeRequestFeature.SearchFunction;
 import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.dto.ChangeRequestReviewDTO;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.entity.ChangeRequestEntity;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.ChangeRequestState;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.SearchCriteria;
+
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestRepository;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestService;
 import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tms.dao.tmsdao.changeRequestDomain.dto.ChangeRequestReviewDTO;
+import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestEntity;
+import com.tms.dao.tmsdao.changeRequestDomain.entityMarker.ChangeRequestEntityMarker;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.ChangeRequestState;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.SearchCriteria;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,7 +49,7 @@ public class ChangeRequestServiceImpl implements ChangeRequestService {
         searchFunctionsMap.put(SearchCriteria.BY_CREATION_DATE, (object, repo, pageable) -> repo.findByCreatedAt((LocalDateTime) object, pageable));
         searchFunctionsMap.put(SearchCriteria.BY_USERNAME, (object, repo, pageable) -> repo.findByCreatedBy(String.valueOf(object), pageable));
         searchFunctionsMap.put(SearchCriteria.BY_OBJECT_TYPE, (object, repo, pageable) -> repo.findByDomainClass(String.valueOf(object), pageable));
-        searchFunctionsMap.put(SearchCriteria.BY_LAST_MODIFICATION_DATE, (object, repo, pageable) -> repo.findByModifiedAt((Date) object, pageable));
+        searchFunctionsMap.put(SearchCriteria.BY_LAST_MODIFICATION_DATE, (object, repo, pageable) -> repo.findByModifiedAt((LocalDateTime) object, pageable));
         searchFunctionsMap.put(SearchCriteria.BY_MODIFIED_BY, (object, repo, pageable) -> repo.findByModifiedBy(String.valueOf(object), pageable));
     }
 

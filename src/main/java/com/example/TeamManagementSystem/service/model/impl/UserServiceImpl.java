@@ -2,12 +2,12 @@ package com.example.TeamManagementSystem.service.model.impl;
 
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
-import com.example.TeamManagementSystem.changeRequestFeature.domain.enumTypes.OperationType;
-import com.example.TeamManagementSystem.domain.dto.UserDTO;
-import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
 import com.example.TeamManagementSystem.repository.UserRepository;
 import com.example.TeamManagementSystem.service.model.UserService;
+import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.OperationType;
+import com.tms.dao.tmsdao.domain.UserEntity;
+import com.tms.dao.tmsdao.domain.dto.UserDTO;
 import lombok.NonNull;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Approver(repository = UserRepository.class, domainClass = UserEntity.class)
