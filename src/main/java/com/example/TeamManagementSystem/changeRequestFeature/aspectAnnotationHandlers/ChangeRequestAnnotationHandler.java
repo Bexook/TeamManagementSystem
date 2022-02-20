@@ -3,12 +3,15 @@ package com.example.TeamManagementSystem.changeRequestFeature.aspectAnnotationHa
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
 import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
-
+import com.example.TeamManagementSystem.changeRequestFeature.events.ChangeRequestEvent;
+import com.example.TeamManagementSystem.changeRequestFeature.events.dto.ChangeRequestEventDetails;
+import com.example.TeamManagementSystem.changeRequestFeature.events.publishers.ChangeRequestEventPublisher;
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestRepository;
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetails;
 import com.example.TeamManagementSystem.exception.RequestApproval;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tms.dao.tmsdao.changeRequestDomain.dto.ChangeRequestDTO;
 import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestEntity;
 import com.tms.dao.tmsdao.changeRequestDomain.entityMarker.ChangeRequestEntityMarker;
 import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.ChangeRequestState;
@@ -24,16 +27,18 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.SystemException;
 import javax.transaction.Transactional;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-
-import static java.lang.Class.forName;
 
 @Aspect
 @Component
 public class ChangeRequestAnnotationHandler {
 
+    @Autowired
+    private ChangeRequestEventPublisher changeRequestEventPublisher;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
@@ -71,13 +76,13 @@ public class ChangeRequestAnnotationHandler {
 
 
     private void proceedChangeRequest(JoinPoint joinPoint, AppUserDetails userDetails, ChangeRequest changeRequestAnnotation, Approver approver) throws JsonProcessingException, ClassNotFoundException {
-        ChangeRequestEntity changeRequestObject = createChangeRequestObject(joinPoint, userDetails, changeRequestAnnotation, approver);
+        ChangeRequestEntity changeRequestObject = createChangeRequestObject(userDetails, changeRequestAnnotation, approver);
         changeRequestOperation(joinPoint, changeRequestAnnotation, approver, changeRequestObject);
         changeRequestRepository.save(changeRequestObject);
     }
 
 
-    private ChangeRequestEntity createChangeRequestObject(JoinPoint joinPoint, AppUserDetails userDetails, ChangeRequest changeRequest, Approver annotation) {
+    private ChangeRequestEntity createChangeRequestObject(AppUserDetails userDetails, ChangeRequest changeRequest, Approver annotation) {
         ChangeRequestEntity changeRequestEntity = new ChangeRequestEntity();
         changeRequestEntity.setChangeRequestState(ChangeRequestState.PENDING);
         changeRequestEntity.setCreatedBy(userDetails.getUsername());
@@ -108,8 +113,8 @@ public class ChangeRequestAnnotationHandler {
                 break;
             }
             case READ: {
-                if(Objects.isNull(joinPoint.getArgs())){
-                    List<?> currentObjectState =  sources.loadRepository(changeRequestEntity.getDomainClass().getClass()).findAll();
+                if (Objects.isNull(joinPoint.getArgs())) {
+                    List<?> currentObjectState = sources.loadRepository(changeRequestEntity.getDomainClass().getClass()).findAll();
                     changeRequestEntity.setCurrentObjectState(objectMapper.writeValueAsString(currentObjectState));
                     readOperation(changeRequestEntity);
                 }
@@ -143,12 +148,18 @@ public class ChangeRequestAnnotationHandler {
     }
 
 
-    private void readOperation(ChangeRequestEntity changeRequestEntity) throws JsonProcessingException {
+    private void readOperation(ChangeRequestEntity changeRequestEntity) {
         changeRequestEntity.setOperationType(OperationType.READ);
     }
 
 
     private String getFunctionQualifier(Class<? extends ChangeRequestEntityMarker> domainClass, String functionName) {
         return (functionName + "(" + domainClass.getName() + ")").replace(" /.,-_=\"\\", "");
+    }
+
+
+    private void publishChangeRequestEvent(final ChangeRequestDTO changeRequest) {
+        final ChangeRequestEvent changeRequestEvent = new ChangeRequestEvent(changeRequest, Clock.systemUTC(), new ChangeRequestEventDetails("Change request created", changeRequest.getOperationType(), changeRequest));
+        changeRequestEventPublisher.publishEvent(changeRequestEvent);
     }
 }
