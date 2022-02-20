@@ -182,7 +182,7 @@
         <repository>
             <id>com-tms-dao</id>
             <name>TMS libs</name>
-            <url>file:${project.basedir}</url>
+            <url>https://tmsservice.jfrog.io/ui/native/tms-dao-mvn-libs-snapshot</url>
         </repository>
         <repository>
             <id>spring-snapshots</id>
