@@ -180,6 +180,11 @@
             </snapshots>
         </repository>
         <repository>
+            <id>com.tms.dao</id>
+            <name>TMS libs</name>
+            <url>https://github.com/Bexook/tms-dao/blob/develop/target/</url>
+        </repository>
+        <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
             <url>https://repo.spring.io/snapshot</url>
