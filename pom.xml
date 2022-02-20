@@ -180,9 +180,9 @@
             </snapshots>
         </repository>
         <repository>
-            <id>com.tms.dao</id>
+            <id>com-tms-dao</id>
             <name>TMS libs</name>
-            <url>https://github.com/Bexook/tms-dao/tree/develop/target</url>
+            <url>https://tmsservice.jfrog.io/artifactory/default-docker-virtual</url>
         </repository>
         <repository>
             <id>spring-snapshots</id>
