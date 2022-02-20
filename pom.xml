@@ -78,7 +78,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.22</version>
+            <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -159,14 +159,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <release>11</release>  <!--or <release>10</release>-->
+                <version>3.8.0</version>
+                <configuration><!--or <release>10</release>-->
+                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                    <source>1.11</source>
+                    <target>1.11</target>
+                    <release>1.11</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.16.22</version>
+                            <version>1.18.20</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
