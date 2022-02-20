@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@Profile({"dev","custom"})
+@Profile({"dev","custom","dev-mysql"})
 @EnableWebMvc
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

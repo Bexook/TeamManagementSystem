@@ -1,8 +1,8 @@
 BEGIN;
 
-CREATE TABLE IF NOT EXISTS app_user
+CREATE TABLE app_user
 (
-    id                     BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id                     BIGINT PRIMARY KEY,
     email                  VARCHAR(500) UNIQUE NOT NULL,
     password               VARCHAR(500)        NOT NULL,
     is_enable              BOOLEAN             NOT NULL default false,
@@ -16,19 +16,19 @@ CREATE TABLE IF NOT EXISTS app_user
 );
 
 
-CREATE TABLE IF NOT EXISTS app_user_audit
+CREATE TABLE app_user_audit
 (
-    id                 BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id                 BIGINT PRIMARY KEY,
     user_id            BIGINT        NOT NULL REFERENCES app_user (id),
     changed_properties VARCHAR(5000) NOT NULL,
     modified_by        BIGINT        NOT NULL REFERENCES app_user (id)
 );
 
-CREATE TABLE IF NOT EXISTS time_log
+CREATE TABLE time_log
 (
-    id                BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id                BIGINT PRIMARY KEY,
     date              DATE        NOT NULL,
-    working_time      DOUBLE      NOT NULL,
+    working_time      FLOAT       NOT NULL,
     calendar_day_type VARCHAR(80) NOT NULL default 'WORKING',
     created_at        DATE        NOT NULL,
     modified_at       DATE        NOT NULL,
@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS time_log
 );
 
 
-CREATE TABLE IF NOT EXISTS team_member
+CREATE TABLE team_member
 (
-    id               BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id               BIGINT PRIMARY KEY,
     username         VARCHAR(500) NOT NULL,
     user_id          BIGINT       NOT NULL REFERENCES app_user (id),
     team_member_role VARCHAR(80)  NOT NULL default 'NOT_ASSIGNED'
@@ -46,16 +46,16 @@ CREATE TABLE IF NOT EXISTS team_member
 
 
 
-CREATE TABLE IF NOT EXISTS active_tokens
+CREATE TABLE active_tokens
 (
-    id        BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id        BIGINT PRIMARY KEY,
     jwt_token VARCHAR(1000) NOT NULL,
     user_id   BIGINT        NOT NULL REFERENCES app_user (id)
 );
 
 CREATE TABLE IF NOT EXISTS change_request
 (
-    id                   BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id                   BIGINT PRIMARY KEY,
     created_by           BIGINT        NOT NULL REFERENCES app_user (id),
     approver_role        VARCHAR(50)   NOT NULL,
     state                VARCHAR(100)  NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS change_request
 
 CREATE TABLE IF NOT EXISTS change_request_comment
 (
-    id                BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id                BIGINT PRIMARY KEY,
     change_request_id BIGINT        NOT NULL REFERENCES change_request (id),
     comment           VARCHAR(5000) NOT NULL,
     comment_by        BIGINT        NOT NULL REFERENCES app_user (id),
@@ -83,12 +83,14 @@ CREATE TABLE IF NOT EXISTS change_request_comment
 
 CREATE TABLE IF NOT EXISTS user_message
 (
-    id           BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id           BIGINT PRIMARY KEY,
     sender_id    BIGINT        NOT NULL REFERENCES app_user (id),
     receiver_id  BIGINT        NOT NULL REFERENCES app_user (id),
-    sending_time DATETIME      NOT NULL,
+    sending_time DATE          NOT NULL,
     is_read      BOOLEAN       NOT NULL default false,
-    read_time    BOOLEAN,
+    read_time    BIT,
     body         VARCHAR(5000) NOT NULL,
     deleted      BOOLEAN       NOT NULL default false
-)
+);
+
+COMMIT;

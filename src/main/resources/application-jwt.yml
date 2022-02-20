@@ -1,16 +1,17 @@
 spring:
   datasource:
-    url: jdbc:mysql://sql11.freesqldatabase.com:3306/sql11473491
-    driverClassName: com.mysql.jdbc.Driver
-    password: PchsC7yWZh
-    username: sql11473491
+    url: jdbc:postgresql://ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/d13dajj1p2915
+    driverClassName: org.postgresql.Driver
+    password: 9be7e5c5b5f9c10ce19c57fa9b42e0a7a2907e27796f93795072062664217b53
+    username: fureeaundkskmo
+    sql-script-encoding: UTF-8
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
   flyway:
-    user: sql11473491
-    password: PchsC7yWZh
+    user: fureeaundkskmo
+    password: 9be7e5c5b5f9c10ce19c57fa9b42e0a7a2907e27796f93795072062664217b53
     locations: classpath:/db/changelog/
 
 jwt:
