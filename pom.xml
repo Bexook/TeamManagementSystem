@@ -162,8 +162,6 @@
                 <version>3.8.0</version>
                 <configuration><!--or <release>10</release>-->
                     <forceJavacCompilerUse>true</forceJavacCompilerUse>
-                    <source>1.11</source>
-                    <target>1.11</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
