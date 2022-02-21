@@ -1,0 +1,7 @@
+application_name: team-ms
+spring_profile: jwt
+instances: 1
+jarFilePath: target/petProject*.war
+disk_quota: 1G
+route: team-ms.com
+memory: 1G

@@ -1,0 +1,17 @@
+---
+applications:
+  - name: ((application_name))
+    path: ((jarFilePath))
+    memory: ((memory))
+    disk_quota: ((disk_quota))
+    instances: ((instances))
+    health-check-type: port
+    stack: cflinuxfs3
+    timeout: 240 # max value
+    buildpacks:
+      - java_buildpack_offline
+    routes:
+      - route: ((route))
+    env:
+      spring.profiles.active: ((spring_profile))
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
