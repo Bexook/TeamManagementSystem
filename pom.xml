@@ -154,6 +154,14 @@
         </dependency>
 
     </dependencies>
+    <profiles>
+        <profile>
+            <id>jwt</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
