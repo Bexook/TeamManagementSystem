@@ -1,7 +1,6 @@
 package com.example.TeamManagementSystem.service;
 
-import com.tms.dao.tmsdao.domain.dto.UserMessageDTO;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.tms.common.domain.dto.UserMessageDTO;
 
 import java.util.List;
 

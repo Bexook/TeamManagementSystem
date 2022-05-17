@@ -1,6 +1,6 @@
 BEGIN;
 
-CREATE TABLE app_user
+CREATE TABLE tms.app_user
 (
     id                     BIGINT PRIMARY KEY,
     email                  VARCHAR(500) UNIQUE NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE app_user
 );
 
 
-CREATE TABLE app_user_audit
+CREATE TABLE tms.app_user_audit
 (
     id                 BIGINT PRIMARY KEY,
     user_id            BIGINT        NOT NULL REFERENCES app_user (id),
@@ -24,7 +24,7 @@ CREATE TABLE app_user_audit
     modified_by        BIGINT        NOT NULL REFERENCES app_user (id)
 );
 
-CREATE TABLE time_log
+CREATE TABLE tms.time_log
 (
     id                BIGINT PRIMARY KEY,
     date              DATE        NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE time_log
 );
 
 
-CREATE TABLE team_member
+CREATE TABLE tms.team_member
 (
     id               BIGINT PRIMARY KEY,
     username         VARCHAR(500) NOT NULL,
@@ -46,14 +46,14 @@ CREATE TABLE team_member
 
 
 
-CREATE TABLE active_tokens
+CREATE TABLE tms.active_tokens
 (
     id        BIGINT PRIMARY KEY,
     jwt_token VARCHAR(1000) NOT NULL,
     user_id   BIGINT        NOT NULL REFERENCES app_user (id)
 );
 
-CREATE TABLE IF NOT EXISTS change_request
+CREATE TABLE IF NOT EXISTS tms.change_request
 (
     id                   BIGINT PRIMARY KEY,
     created_by           BIGINT        NOT NULL REFERENCES app_user (id),
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS change_request
 );
 
 
-CREATE TABLE IF NOT EXISTS change_request_comment
+CREATE TABLE IF NOT EXISTS tms.change_request_comment
 (
     id                BIGINT PRIMARY KEY,
     change_request_id BIGINT        NOT NULL REFERENCES change_request (id),
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS change_request_comment
     is_relevant       BOOLEAN       NOT NULL default true
 );
 
-CREATE TABLE IF NOT EXISTS user_message
+CREATE TABLE IF NOT EXISTS tms.user_message
 (
     id           BIGINT PRIMARY KEY,
     sender_id    BIGINT        NOT NULL REFERENCES app_user (id),
@@ -93,4 +93,10 @@ CREATE TABLE IF NOT EXISTS user_message
     deleted      BOOLEAN       NOT NULL default false
 );
 
+
+CREATE TABLE IF NOT EXISTS tms.app_user_time_log(
+    id BIGINT PRIMARY KEY,
+    user_id BIGINT REFERENCES tms.app_user(id),
+    time_log_id BIGINT REFERENCES tms.time_log(id)
+);
 COMMIT;

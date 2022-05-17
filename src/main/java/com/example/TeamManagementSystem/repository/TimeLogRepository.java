@@ -1,6 +1,6 @@
 package com.example.TeamManagementSystem.repository;
 
-import com.tms.dao.tmsdao.domain.TimeLogEntity;
+import com.tms.common.domain.TimeLogEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -6,14 +6,14 @@ import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestRepository;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestService;
-import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
+import com.tms.common.mapper.OrikaBeanMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tms.dao.tmsdao.changeRequestDomain.dto.ChangeRequestReviewDTO;
-import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestEntity;
-import com.tms.dao.tmsdao.changeRequestDomain.entityMarker.ChangeRequestEntityMarker;
-import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.ChangeRequestState;
-import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.SearchCriteria;
+import com.tms.common.changeRequestDomain.dto.ChangeRequestReviewDTO;
+import com.tms.common.changeRequestDomain.entity.ChangeRequestEntity;
+import com.tms.common.changeRequestDomain.entityMarker.ChangeRequestEntityMarker;
+import com.tms.common.changeRequestDomain.enumTypes.ChangeRequestState;
+import com.tms.common.changeRequestDomain.enumTypes.SearchCriteria;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

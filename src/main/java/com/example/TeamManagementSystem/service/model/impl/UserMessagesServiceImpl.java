@@ -1,12 +1,12 @@
 package com.example.TeamManagementSystem.service.model.impl;
 
 
-import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
+import com.tms.common.mapper.OrikaBeanMapper;
 import com.example.TeamManagementSystem.repository.UserMessagesRepository;
 import com.example.TeamManagementSystem.service.UserMessagesService;
-import com.example.TeamManagementSystem.util.AuthorizationUtils;
-import com.tms.dao.tmsdao.domain.UserMessagesEntity;
-import com.tms.dao.tmsdao.domain.dto.UserMessageDTO;
+import com.tms.common.util.AuthorizationUtils;
+import com.tms.common.domain.UserMessagesEntity;
+import com.tms.common.domain.dto.UserMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

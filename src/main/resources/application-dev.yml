@@ -1,15 +1,27 @@
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/d13dajj1p2915
+    url: jdbc:postgresql://ec2-176-34-211-0.eu-west-1.compute.amazonaws.com:5432/d5fdaeoa8pv3a
     driverClassName: org.postgresql.Driver
-
+    password: 39d15fae888ee50d10973beb001172a87f12ebcf2bee54b2d395ee647f837d66
+    username: fwroyxzmouaqlk
+    sql-script-encoding: UTF-8
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
   flyway:
-    user: fureeaundkskmo
-    password: 9be7e5c5b5f9c10ce19c57fa9b42e0a7a2907e27796f93795072062664217b53
+    user: fwroyxzmouaqlk
+    password: 39d15fae888ee50d10973beb001172a87f12ebcf2bee54b2d395ee647f837d66
     locations: classpath:/db/changelog/
+
+jwt:
+  secret: jWtSecreTk_e_y
+  expiration: 30
+
+system:
+  api:
+    app-secret-prefix: vnrem5Edvd!+24*cj
+    app-key-header-value: "Application Key"
+    app-secret-header-value: "Application Secret"
 
 

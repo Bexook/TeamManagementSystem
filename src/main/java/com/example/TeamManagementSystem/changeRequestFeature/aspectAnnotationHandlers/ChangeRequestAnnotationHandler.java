@@ -1,22 +1,24 @@
 package com.example.TeamManagementSystem.changeRequestFeature.aspectAnnotationHandlers;
 
-import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
-import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
+import com.tms.common.annotation.Approver;
+import com.tms.common.annotation.ChangeRequest;
 import com.example.TeamManagementSystem.changeRequestFeature.configs.Sources;
 import com.example.TeamManagementSystem.changeRequestFeature.events.ChangeRequestEvent;
 import com.example.TeamManagementSystem.changeRequestFeature.events.dto.ChangeRequestEventDetails;
 import com.example.TeamManagementSystem.changeRequestFeature.events.publishers.ChangeRequestEventPublisher;
 import com.example.TeamManagementSystem.changeRequestFeature.repository.ChangeRequestRepository;
-import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetails;
+
 import com.example.TeamManagementSystem.exception.RequestApproval;
+import com.example.TeamManagementSystem.service.UserMessagesService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tms.dao.tmsdao.changeRequestDomain.dto.ChangeRequestDTO;
-import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestEntity;
-import com.tms.dao.tmsdao.changeRequestDomain.entityMarker.ChangeRequestEntityMarker;
-import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.ChangeRequestState;
-import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.OperationType;
-import com.tms.dao.tmsdao.domain.enumTypes.auth.UserRole;
+import com.tms.common.changeRequestDomain.dto.ChangeRequestDTO;
+import com.tms.common.changeRequestDomain.entity.ChangeRequestEntity;
+import com.tms.common.changeRequestDomain.entityMarker.ChangeRequestEntityMarker;
+import com.tms.common.changeRequestDomain.enumTypes.ChangeRequestState;
+import com.tms.common.changeRequestDomain.enumTypes.OperationType;
+import com.tms.common.domain.enumTypes.auth.UserRole;
+import com.tms.common.userAuthDataConfiguration.AppUserDetails;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -28,8 +30,6 @@ import org.springframework.stereotype.Component;
 import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import java.time.Clock;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,8 +45,10 @@ public class ChangeRequestAnnotationHandler {
     private ChangeRequestRepository changeRequestRepository;
     @Autowired
     private Sources<Long> sources;
+    @Autowired
+    private UserMessagesService userMessagesService;
 
-    @Pointcut("@annotation(com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest)")
+    @Pointcut("@annotation(com.tms.common.annotation.ChangeRequest)")
     public void annotationPointCut() {
     }
 
@@ -150,6 +152,7 @@ public class ChangeRequestAnnotationHandler {
 
     private void readOperation(ChangeRequestEntity changeRequestEntity) {
         changeRequestEntity.setOperationType(OperationType.READ);
+//        userMessagesService.sendMessage();
     }
 
 

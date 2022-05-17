@@ -3,10 +3,10 @@ package com.example.TeamManagementSystem.changeRequestFeature.controller;
 
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestCommentService;
 import com.example.TeamManagementSystem.changeRequestFeature.service.ChangeRequestService;
-import com.example.TeamManagementSystem.domain.SearchStrategy;
-import com.tms.dao.tmsdao.changeRequestDomain.dto.ChangeRequestReviewDTO;
-import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestCommentEntity;
-import com.tms.dao.tmsdao.changeRequestDomain.entity.ChangeRequestEntity;
+import com.tms.common.domain.model.SearchStrategy;
+import com.tms.common.changeRequestDomain.dto.ChangeRequestReviewDTO;
+import com.tms.common.changeRequestDomain.entity.ChangeRequestCommentEntity;
+import com.tms.common.changeRequestDomain.entity.ChangeRequestEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

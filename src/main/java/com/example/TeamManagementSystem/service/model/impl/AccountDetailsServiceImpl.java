@@ -1,15 +1,15 @@
 package com.example.TeamManagementSystem.service.model.impl;
 
 import com.example.TeamManagementSystem.service.model.AccountDetailsService;
-import com.example.TeamManagementSystem.service.model.UserService;
+import com.tms.common.security.service.UserService;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
-import com.example.TeamManagementSystem.util.AuthorizationUtils;
-import com.tms.dao.tmsdao.domain.TeamMemberEntity;
-import com.tms.dao.tmsdao.domain.UserEntity;
-import com.tms.dao.tmsdao.domain.dto.TeamMemberDTO;
-import com.tms.dao.tmsdao.domain.dto.UserDTO;
-import com.tms.dao.tmsdao.domain.dto.UserRegisterDTO;
-import com.tms.dao.tmsdao.domain.enumTypes.auth.UserRole;
+import com.tms.common.util.AuthorizationUtils;
+import com.tms.common.domain.TeamMemberEntity;
+import com.tms.common.domain.UserEntity;
+import com.tms.common.domain.dto.TeamMemberDTO;
+import com.tms.common.domain.dto.UserDTO;
+import com.tms.common.domain.dto.UserRegisterDTO;
+import com.tms.common.domain.enumTypes.auth.UserRole;
 import javassist.tools.web.BadHttpRequest;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.util.Strings;

@@ -1,16 +1,16 @@
 package com.example.TeamManagementSystem.service.model.impl;
 
-import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
-import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
-import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
+import com.tms.common.annotation.Approver;
+import com.tms.common.annotation.ChangeRequest;
+import com.tms.common.mapper.OrikaBeanMapper;
 import com.example.TeamManagementSystem.repository.TeamMemberRepository;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
-import com.example.TeamManagementSystem.service.model.UserService;
-import com.tms.dao.tmsdao.changeRequestDomain.enumTypes.OperationType;
-import com.tms.dao.tmsdao.domain.TeamMemberEntity;
-import com.tms.dao.tmsdao.domain.dto.TeamMemberDTO;
-import com.tms.dao.tmsdao.domain.dto.UserDTO;
-import com.tms.dao.tmsdao.domain.enumTypes.TeamMemberRole;
+import com.tms.common.security.service.UserService;
+import com.tms.common.changeRequestDomain.enumTypes.OperationType;
+import com.tms.common.domain.TeamMemberEntity;
+import com.tms.common.domain.dto.TeamMemberDTO;
+import com.tms.common.domain.dto.UserDTO;
+import com.tms.common.domain.enumTypes.TeamMemberRole;
 import javassist.tools.web.BadHttpRequest;
 import lombok.NonNull;
 import org.hibernate.Session;

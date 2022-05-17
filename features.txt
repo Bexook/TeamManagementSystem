@@ -10,3 +10,4 @@ TASKS:
 - Feed page: implement feed logic, CRUD and, create migration for it
 - Rewrite security: our authorization should rely on AccessType with Authorities('read, update,...');
 - Notification service: implement notification service based on Flux WebSocket;
+- Gateway communication for FE, auth on gate way side, csrf token connection between gateway and microservices

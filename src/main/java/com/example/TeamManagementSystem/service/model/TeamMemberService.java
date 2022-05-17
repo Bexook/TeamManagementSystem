@@ -1,9 +1,9 @@
 package com.example.TeamManagementSystem.service.model;
 
 
-import com.tms.dao.tmsdao.domain.TeamMemberEntity;
-import com.tms.dao.tmsdao.domain.dto.TeamMemberDTO;
-import com.tms.dao.tmsdao.domain.enumTypes.TeamMemberRole;
+import com.tms.common.domain.TeamMemberEntity;
+import com.tms.common.domain.dto.TeamMemberDTO;
+import com.tms.common.domain.enumTypes.TeamMemberRole;
 import javassist.tools.web.BadHttpRequest;
 
 import java.io.IOException;

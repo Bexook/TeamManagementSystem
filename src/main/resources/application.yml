@@ -1,8 +1,15 @@
 spring:
   jpa:
     open-in-view: false
+  application:
+    name: main
+  flyway:
+    create-schemas: false
+    schemas: tms, service
 logging:
   level:
     flyway: INFO
+server:
+  port: 9091
 
 

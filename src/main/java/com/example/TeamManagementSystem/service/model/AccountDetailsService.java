@@ -1,8 +1,8 @@
 package com.example.TeamManagementSystem.service.model;
 
-import com.tms.dao.tmsdao.domain.dto.TeamMemberDTO;
-import com.tms.dao.tmsdao.domain.dto.UserDTO;
-import com.tms.dao.tmsdao.domain.dto.UserRegisterDTO;
+import com.tms.common.domain.dto.TeamMemberDTO;
+import com.tms.common.domain.dto.UserDTO;
+import com.tms.common.domain.dto.UserRegisterDTO;
 
 import java.util.List;
 
