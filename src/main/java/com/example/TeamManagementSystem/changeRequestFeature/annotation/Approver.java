@@ -1,6 +1,7 @@
 package com.example.TeamManagementSystem.changeRequestFeature.annotation;
 
 import com.example.TeamManagementSystem.changeRequestFeature.domain.entityMarker.ChangeRequestEntityMarker;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,4 +15,6 @@ public @interface Approver {
     Class<?> repository();
 
     Class<? extends ChangeRequestEntityMarker> domainClass();
+
+    UserRole[] userRoles() default UserRole.ADMIN;
 }
