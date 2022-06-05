@@ -57,6 +57,12 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
             <column name="calendar_day_type" type="INT" defaultValue="3">
                 <constraints nullable="false"/>
             </column>
+            <column name="access_type" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority" type="VARCHAR(700)">
+                <constraints nullable="false"/>
+            </column>
             <column name="created_at" type="date">
                 <constraints nullable="false"/>
             </column>

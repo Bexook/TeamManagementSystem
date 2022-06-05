@@ -18,6 +18,9 @@ public interface TimeLogRepository extends JpaRepository<TimeLogEntity, Long> {
     @Query(name = "fetchByTimeSpan", nativeQuery = true)
     List<TimeLogEntity> findByTimeSpan(@Param("startDate") final LocalDate start, @Param("endDate") final LocalDate end);
 
+    @Query(name = "fetchByUserList")
+    List<TimeLogEntity> findByUserList(@Param("teamMembers") final List<String> userEmails);
+
     List<TimeLogEntity> findByCreatedBy(String email);
 
 }

@@ -5,8 +5,6 @@ import com.example.TeamManagementSystem.configuration.security.userAuthDataConfi
 import com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration.AppUserDetailsService;
 import com.example.TeamManagementSystem.domain.UserCredentials;
 import com.example.TeamManagementSystem.domain.entity.JWTTokenEntity;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.Authority;
-import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import com.example.TeamManagementSystem.repository.JWTTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -51,7 +49,9 @@ public class JWTServiceImpl implements JWTService {
     public String generateToken(AppUserDetails appUserDetails) {
         Date expiration = Date.from(Instant.from(LocalDate.now().plusDays(expirationPeriod).atStartOfDay(ZoneId.systemDefault())));
         Claims claims = Jwts.claims().setSubject(appUserDetails.getUsername());
-        claims.put("userRole", appUserDetails.getAuthorities());
+        claims.put("userRole", appUserDetails.getUserRole());
+        claims.put("authorities", appUserDetails.getAuthorities());
+        claims.put("accessType", appUserDetails.getAccessType());
         claims.setExpiration(expiration);
         String token = Jwts.builder()
                 .setClaims(claims)
@@ -97,17 +97,6 @@ public class JWTServiceImpl implements JWTService {
     @Override
     public String getPrincipal(String token) {
         return (String) getClaims(token).getSubject();
-    }
-
-
-    @Override
-    public Authority getAuthority(String token) {
-        return getClaims(token).get("authority", Authority.class);
-    }
-
-    @Override
-    public UserRole getUserRole(String token) {
-        return UserRole.valueOf(getClaims(token).get("userRole", String.class));
     }
 
     @Override

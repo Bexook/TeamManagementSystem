@@ -12,3 +12,14 @@ import java.lang.annotation.Target;
 public @interface ChangeRequest {
     OperationType operationType();
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -11,8 +11,9 @@ import java.time.LocalDate;
 
 
 @NamedNativeQueries(value = {
-        @NamedNativeQuery(name = "fetchByTimeSpan", query = "SELECT * FROM time_log WHERE date => :startDate AND date <= :endDate"),
-        @NamedNativeQuery(name = "fetchByUserAndTimeSpan", query = "SELECT * FROM time_log WHERE date => :startDate AND date <= :endDate AND created_by = :createdBy")
+        @NamedNativeQuery(name = "fetchByTimeSpan", query = "SELECT * FROM time_log WHERE date >= :startDate AND date <= :endDate"),
+        @NamedNativeQuery(name = "fetchByUserAndTimeSpan", query = "SELECT * FROM time_log WHERE date >= :startDate AND date <= :endDate AND created_by = :createdBy", resultClass = TimeLogEntity.class),
+        @NamedNativeQuery(name = "fetchByUserList", query = "SELECT * FROM time_log WHERE created_by IN(:teamMembers)")
 })
 
 @Data

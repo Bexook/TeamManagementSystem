@@ -21,7 +21,6 @@ import java.util.List;
 @RequestMapping("/api/change-request/approver")
 public class ChangeRequestAdminOperationResource {
 
-
     @Autowired
     private ChangeRequestService changeRequestService;
     @Autowired
@@ -39,7 +38,7 @@ public class ChangeRequestAdminOperationResource {
 
 
     @PostMapping("/comment")
-    @PreAuthorize("@userAccessValidation.hasAuthority('APPROVE','USER')")
+    @PreAuthorize("@userAccessValidation.hasAuthority('APPROVE') && @userAccessValidation.hasRole('ADMIN','USER')")
     public ResponseEntity<List<ChangeRequestCommentEntity>> commentChangeRequest(@RequestBody ChangeRequestReviewDTO changeRequestReviewDTO) {
         return ResponseEntity.accepted().body(changeRequestCommentService.addAllComments(changeRequestReviewDTO.getComment()));
     }

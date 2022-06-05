@@ -58,14 +58,12 @@ public class TeamMemberEntity extends BaseEntity implements ChangeRequestEntityM
     private String name;
 
     @Column(name = "team_member_role")
-    @Enumerated(value = EnumType.ORDINAL)
+    @Enumerated()
     private TeamMemberRole memberRole;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",
-            columnDefinition = "BIGINT NOT NULL UNIQUE",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "user_id_constraint"))
-    private UserEntity userEntity;
+            referencedColumnName = "id")
+    private UserEntity user;
 
 }

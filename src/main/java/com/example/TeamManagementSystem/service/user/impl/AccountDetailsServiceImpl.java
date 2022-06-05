@@ -1,19 +1,17 @@
-package com.example.TeamManagementSystem.service.model.impl;
+package com.example.TeamManagementSystem.service.user.impl;
 
 import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
-import com.example.TeamManagementSystem.service.model.AccountDetailsService;
-import com.example.TeamManagementSystem.service.model.UserService;
+import com.example.TeamManagementSystem.service.user.AccountDetailsService;
+import com.example.TeamManagementSystem.service.user.UserService;
 import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
 import com.example.TeamManagementSystem.domain.entity.TeamMemberEntity;
-import com.example.TeamManagementSystem.service.model.TeamMemberService;
+import com.example.TeamManagementSystem.service.team.TeamMemberService;
 import com.example.TeamManagementSystem.util.AuthorizationUtils;
 import javassist.tools.web.BadHttpRequest;
-import liquibase.pro.packaged.A;
 import lombok.SneakyThrows;
-import org.apache.http.HttpException;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,7 +37,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 
     @Override
     public List<TeamMemberDTO> getAccountDetails() {
-        return teamMemberService.findAll();
+        return teamMemberService.findAllTeamMembers();
     }
 
     @Override
@@ -75,7 +73,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
         TeamMemberEntity teamMember = new TeamMemberEntity();
         teamMember.setName(userRegisterDTO.getUsername());
         teamMember.setMemberRole(userRegisterDTO.getTeamMemberRole());
-        teamMember.setUserEntity(userEntity);
+        teamMember.setUser(userEntity);
         teamMemberService.registerTeamMember(teamMember);
     }
 }

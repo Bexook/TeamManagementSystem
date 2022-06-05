@@ -1,9 +1,8 @@
 package com.example.TeamManagementSystem.controller.rest;
 
-import com.example.TeamManagementSystem.domain.AccountDetails;
 import com.example.TeamManagementSystem.domain.dto.TeamMemberDTO;
 import com.example.TeamManagementSystem.domain.dto.UserRegisterDTO;
-import com.example.TeamManagementSystem.service.model.AccountDetailsService;
+import com.example.TeamManagementSystem.service.user.AccountDetailsService;
 import com.example.TeamManagementSystem.util.AuthorizationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

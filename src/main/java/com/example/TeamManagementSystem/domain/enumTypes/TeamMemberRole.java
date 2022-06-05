@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public enum TeamMemberRole {
 
-    FRONTEND(1),
-    BACKEND(2),
-    PM(3),
-    DEVOPS(4),
-    PENDING(5),
-    NONE(6);
+    FRONTEND(0),
+    BACKEND(1),
+    PM(2),
+    DEVOPS(3),
+    PENDING(4),
+    NONE(5);
 
     private int code;
 

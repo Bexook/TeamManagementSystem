@@ -5,38 +5,37 @@ https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
 
     <changeSet id="04" author="sa">
-
         <insert tableName="team_member">
             <column name="username" value="Andrew"/>
-            <column name="team_member_role" value="1"/>
+            <column name="team_member_role" value="0"/>
             <column name="user_id" value="1" type="BIGINT"/>
             <column name="created_at" value="2019-02-03" type="date"/>
         </insert>
 
         <insert tableName="team_member">
             <column name="username" value="Denys"/>
-            <column name="team_member_role" value="2"/>
+            <column name="team_member_role" value="1"/>
             <column name="user_id" value="2" type="BIGINT"/>
             <column name="created_at" value="2019-02-03" type="date"/>
         </insert>
 
         <insert tableName="team_member">
             <column name="username" value="Rostyk"/>
-            <column name="team_member_role" value="1"/>
+            <column name="team_member_role" value="0"/>
             <column name="user_id" value="3" type="BIGINT"/>
             <column name="created_at" value="2019-02-03" type="date"/>
         </insert>
 
         <insert tableName="team_member">
             <column name="username" value="Bohdan"/>
-            <column name="team_member_role" value="5"/>
+            <column name="team_member_role" value="4"/>
             <column name="user_id" value="4" type="BIGINT"/>
             <column name="created_at" value="2019-02-03" type="date"/>
         </insert>
 
         <insert tableName="team_member">
             <column name="username" value="Petro"/>
-            <column name="team_member_role" value="6"/>
+            <column name="team_member_role" value="5"/>
             <column name="user_id" value="5" type="BIGINT"/>
             <column name="created_at" value="2019-02-03" type="date"/>
         </insert>

@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.service.model;
+package com.example.TeamManagementSystem.service.user;
 
 import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
@@ -12,7 +12,7 @@ public interface UserService {
 
     UserDTO getUserById(@NonNull Long id);
 
-    UserEntity registerUser(@NonNull UserEntity userEntity);
+    UserEntity registerUser(@NonNull UserDTO userEntity);
 
     void deleteById(Long id);
 

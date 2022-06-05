@@ -1,6 +1,7 @@
 package com.example.TeamManagementSystem.configuration.security.userAuthDataConfiguration;
 
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
+import com.example.TeamManagementSystem.domain.enumTypes.auth.AccessType;
 import com.example.TeamManagementSystem.domain.enumTypes.auth.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -57,6 +58,9 @@ public class AppUserDetails implements UserDetails {
         return userEntity.getUserRole();
     }
 
+    public AccessType getAccessType(){
+        return userEntity.getAccessType();
+    }
 
     public boolean nonNullProperties() {
         return Objects.nonNull(this.userEntity) &&

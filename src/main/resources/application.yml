@@ -2,7 +2,7 @@ spring:
   thymeleaf:
     mode: html
   jpa:
-    open-in-view: false
+    open-in-view: true
 logging:
   level:
     liquibase: INFO

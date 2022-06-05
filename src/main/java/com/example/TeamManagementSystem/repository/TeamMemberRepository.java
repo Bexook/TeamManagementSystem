@@ -11,12 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeamMemberRepository extends JpaRepository<TeamMemberEntity, Long> {
 
-
     @NonNull TeamMemberEntity getById(Long id);
-
-    @Query(nativeQuery = true, name = "findDTOById")
-    TeamMemberDTO findByDTOId(@Param("id") Long id);
-
 
     @Query(nativeQuery = true, name = "findDTOByUserId")
     TeamMemberDTO findByDTOUserId(@Param("id") Long id);

@@ -18,14 +18,14 @@ public class UserAccessValidationImpl implements UserAccessValidation {
     public boolean isAllowedAccessType(String... accessType) {
         AppUserDetails user = (AppUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<AccessType> accessTypeList = List.of(accessType).stream().map(AccessType::valueOf).collect(Collectors.toList());
-        return accessTypeList.contains(user.getUserRole().getAccessType());
+        return accessTypeList.contains(user.getAccessType());
     }
 
     @Override
     public boolean hasAuthority(String... authority) {
         AppUserDetails user = (AppUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Authority> authorityList = List.of(authority).stream().map(Authority::valueOf).collect(Collectors.toList());
-        return user.getUserRole().getAuthority().containsAll(authorityList);
+        return user.getAuthorities().containsAll(authorityList);
     }
 
     @Override

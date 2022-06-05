@@ -1,4 +1,4 @@
-package com.example.TeamManagementSystem.service.model.impl;
+package com.example.TeamManagementSystem.service.user.impl;
 
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.Approver;
 import com.example.TeamManagementSystem.changeRequestFeature.annotation.ChangeRequest;
@@ -7,7 +7,7 @@ import com.example.TeamManagementSystem.domain.dto.UserDTO;
 import com.example.TeamManagementSystem.domain.entity.UserEntity;
 import com.example.TeamManagementSystem.mapper.OrikaBeanMapper;
 import com.example.TeamManagementSystem.repository.UserRepository;
-import com.example.TeamManagementSystem.service.model.UserService;
+import com.example.TeamManagementSystem.service.user.UserService;
 import lombok.NonNull;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Approver(repository = UserRepository.class, domainClass = UserEntity.class)
@@ -40,9 +39,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     @ChangeRequest(operationType = OperationType.CREATE)
-    public UserEntity registerUser(@NonNull UserEntity userEntity) {
-        userRepository.save(userEntity);
-        return userRepository.findByEmail(userEntity.getEmail());
+    public UserEntity registerUser(@NonNull UserDTO user) {
+        userRepository.save(mapper.map(user, UserEntity.class));
+        return userRepository.findByEmail(user.getEmail());
     }
 
     @Override
