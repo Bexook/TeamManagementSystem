@@ -2,6 +2,7 @@ package com.example.TeamManagementSystem.service.model.impl;
 
 import com.tms.common.annotation.Approver;
 import com.tms.common.annotation.ChangeRequest;
+import com.tms.common.domain.UserEntity;
 import com.tms.common.mapper.OrikaBeanMapper;
 import com.example.TeamManagementSystem.repository.TeamMemberRepository;
 import com.example.TeamManagementSystem.service.model.TeamMemberService;
@@ -39,16 +40,13 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     private OrikaBeanMapper mapper;
 
 
-    @Override
     public TeamMemberDTO findById(@NonNull Long id) {
         return mapper.map(teamMemberRepository.findById(id).orElseThrow(), TeamMemberDTO.class);
     }
-
     @Override
-    public TeamMemberDTO findDTOById(@NonNull Long id) {
-        return Objects.requireNonNull(teamMemberRepository.findByDTOId(id));
+    public List<TeamMemberDTO> getForTeam(Long teamId) {
+        return null;
     }
-
     @Override
     public TeamMemberDTO findByUserId(@NonNull Long id) {
         return Objects.requireNonNull(teamMemberRepository.findByDTOUserId(id));
@@ -82,10 +80,21 @@ public class TeamMemberServiceImpl implements TeamMemberService {
 
     @Override
     @ChangeRequest(operationType = OperationType.UPDATE)
-    public boolean addNew(@NonNull TeamMemberEntity teamMember) {
-        UserDTO userDTO = userService.findByEmail(teamMember.getUserEntity().getEmail());
-        return Objects.nonNull(teamMemberRepository.findByDTOUserId(userDTO.getId()));
+    public void addNew(@NonNull TeamMemberDTO teamMember, @NonNull final String userEmail) {
+        UserDTO userDTO = userService.findByEmail(userEmail);
+        final TeamMemberEntity entity = mapper.map(teamMember, TeamMemberEntity.class);
+        entity.setUser(mapper.map(userDTO, UserEntity.class));
+        teamMemberRepository.flush();
+        teamMemberRepository.save(entity);
     }
+
+    @Override
+    @Transactional()
+    public List<TeamMemberDTO> findAllTeamMembers() {
+        final List<TeamMemberEntity> entities = teamMemberRepository.findAll();
+        return mapper.mapAsList(entities, TeamMemberDTO.class);
+    }
+
 
     @Override
     @ChangeRequest(operationType = OperationType.CREATE)
@@ -93,9 +102,4 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         teamMemberRepository.save(teamMember);
     }
 
-
-    @Override
-    public List<TeamMemberDTO> findAll() {
-        return mapper.mapAsList(teamMemberRepository.findAll(), TeamMemberDTO.class);
-    }
 }

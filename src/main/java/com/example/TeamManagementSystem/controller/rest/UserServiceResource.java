@@ -9,20 +9,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserServiceResource {
 
 
     @Autowired
     private UserService userService;
 
+    @PostMapping("/register")
+    public void registerUser(@RequestBody final UserDTO user) {
+        userService.registerUser(user);
+    }
+
     @PostMapping("/delete/{id}")
     public void deleteUser(@PathVariable(name = "id") Long id) {
         userService.deleteById(id);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<UserDTO> getUserByEmail(@RequestPart(name = "email") String email) {
+    @GetMapping("/get")
+    public ResponseEntity<UserDTO> getUserByEmail(@RequestParam(name = "email") String email) {
         return ResponseEntity.ok().body(userService.findByEmail(email));
     }
 

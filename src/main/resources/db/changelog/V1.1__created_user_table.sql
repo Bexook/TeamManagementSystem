@@ -9,6 +9,8 @@ CREATE TABLE tms.app_user
     is_active              BOOLEAN             NOT NULL default false,
     is_expired             BOOLEAN             NOT NULL default false,
     is_credentials_expired BOOLEAN             NOT NULL default false,
+    access_type            VARCHAR(150)        NOT NULL,
+    authorities            VARCHAR(700)        NOT NULL,
     created_at             DATE                NOT NULL,
     modified_at            DATE,
     is_email_verified      BOOLEAN             NOT NULL default false,
@@ -94,9 +96,28 @@ CREATE TABLE IF NOT EXISTS tms.user_message
 );
 
 
-CREATE TABLE IF NOT EXISTS tms.app_user_time_log(
-    id BIGINT PRIMARY KEY,
-    user_id BIGINT REFERENCES tms.app_user(id),
-    time_log_id BIGINT REFERENCES tms.time_log(id)
+CREATE TABLE IF NOT EXISTS tms.app_user_time_log
+(
+    id          BIGINT PRIMARY KEY,
+    user_id     BIGINT REFERENCES tms.app_user (id),
+    time_log_id BIGINT REFERENCES tms.time_log (id)
 );
+
+
+
+CREATE TABLE team
+(
+    id           BIGINT PRIMARY KEY,
+    project_name VARCHAR(300)
+);
+
+
+CREATE TABLE team_member_ref_team
+(
+    team_member_id BIGINT,
+    team_id        BIGINT,
+    FOREIGN KEY (team_member_id) REFERENCES tms.team_member (id),
+    FOREIGN KEY (team_id) REFERENCES tms.team_member (id)
+);
+
 COMMIT;

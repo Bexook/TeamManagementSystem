@@ -9,9 +9,11 @@ import java.util.List;
 
 public interface TimeLogService {
 
-    List<TimeLogDTO> findByUserAndSpan(final UserDTO userDTO, final LocalDate start, final LocalDate end);
+    List<TimeLogDTO> findByUserAndSpan(final String userEmail, final LocalDate start, final LocalDate end);
 
     List<TimeLogDTO> findBySpan(final LocalDate start, final LocalDate end);
+
+    List<TimeLogDTO> findByTeam(final Long teamId);
 
     List<TimeLogDTO> findByUser(final UserDTO userDTO);
 

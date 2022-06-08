@@ -37,7 +37,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 
     @Override
     public List<TeamMemberDTO> getAccountDetails() {
-        return teamMemberService.findAll();
+        return teamMemberService.findAllTeamMembers();
     }
 
     @Override
@@ -73,7 +73,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
         TeamMemberEntity teamMember = new TeamMemberEntity();
         teamMember.setName(userRegisterDTO.getUsername());
         teamMember.setMemberRole(userRegisterDTO.getTeamMemberRole());
-        teamMember.setUserEntity(userEntity);
+        teamMember.setUser(userEntity);
         teamMemberService.registerTeamMember(teamMember);
     }
 }

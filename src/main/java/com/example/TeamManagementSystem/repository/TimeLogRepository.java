@@ -20,4 +20,9 @@ public interface TimeLogRepository extends JpaRepository<TimeLogEntity, Long> {
 
     List<TimeLogEntity> findByCreatedBy(String email);
 
+    @Query(name = "fetchByUserList")
+    List<TimeLogEntity> findByUserList(@Param("teamMembers") final List<String> userEmails);
+
+
+
 }
